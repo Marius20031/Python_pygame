@@ -36,24 +36,24 @@ def draw_board():
                          (board2_x + board2_width, board2_y + i * cell2_size), 2)
 
 # Boat dimensions
-boat_width_1 = 3 * cell_size
+boat_width_1 = 2 * cell_size
 boat_height_1 = 1 * cell_size
 
-boat_width_2= 4 * cell_size
+boat_width_2= 3 * cell_size
 boat_height_2 = 1 * cell_size
 
-boat_width_3 = 5 * cell_size
+boat_width_3 = 4 * cell_size
 boat_height_3 = 1 * cell_size
 
-boat_width_4 = 2 * cell_size
+boat_width_4 = 5 * cell_size
 boat_height_4 = 1 * cell_size
 
 # Boats' initial positions
 boats = [
-    (2 * cell_size, 2 * cell_size),
-    (5 * cell_size, 4 * cell_size),
-    (1 * cell_size, 7 * cell_size),
-    (7 * cell_size, 1 * cell_size)
+    (2 * cell_size, 1 * cell_size),
+    (3 * cell_size, 2 * cell_size),
+    (4 * cell_size, 3 * cell_size),
+    (5 * cell_size, 4 * cell_size)
 ]
 
 # Drag and drop variables
@@ -88,7 +88,7 @@ def run_game():
     global selected
     global offset_x
     global offset_y
-    timer();
+    timer()
     move_board2()
     running = True
     while running:
@@ -98,7 +98,7 @@ def run_game():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
                 for i, (boat_x, boat_y) in enumerate(boats):
-                    if boat_x <= mouse_x <= boat_x + boat_width_1 and boat_y <= mouse_y <= boat_y + boat_height_1:
+                    if boat_x <= mouse_x <= boat_x+(i+2)*cell_size and boat_y <= mouse_y <= boat_y+cell_size : # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                         selected = i
                         offset_x = mouse_x - boat_x
                         offset_y = mouse_y - boat_y
