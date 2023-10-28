@@ -123,20 +123,23 @@ def run_game():
 
         screen.fill(Fundal)  # Fill the screen with background color
         draw_board()  # Draw the board
-
+        color_1=(65,84,178)
+        color_2 = (58, 45, 240)
+        color_3 = (232, 252, 56)
+        color_4 = (48, 195, 126)
         for i, (boat_x, boat_y) in enumerate(boats):
             if i == selected:
                 color = (255, 0, 0)  # Highlight the selected boat in red
             else:
                 color = (0, 0, 255)  # Set the default boat color to blue
             if i == 0:
-                pygame.draw.rect(screen, color, (boat_x, boat_y, boat_width_1, boat_height_1))
+                pygame.draw.rect(screen, color_1, (boat_x, boat_y, boat_width_1, boat_height_1))
             elif i == 1:
-                pygame.draw.rect(screen, color, (boat_x, boat_y, boat_width_2, boat_height_2))
+                pygame.draw.rect(screen, color_2, (boat_x, boat_y, boat_width_2, boat_height_2))
             elif i == 2:
-                pygame.draw.rect(screen, color, (boat_x, boat_y, boat_width_3, boat_height_3))
+                pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
             elif i == 3:
-                pygame.draw.rect(screen, color, (boat_x, boat_y, boat_width_4, boat_height_4))
+                pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
 
         pygame.display.flip()  # Update the full display surface
 
