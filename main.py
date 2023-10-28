@@ -36,6 +36,7 @@ def draw_board():
                          (board2_x + board2_width, board2_y + i * cell2_size), 2)
 
 # Boat dimensions
+
 boat_width_1 = 2 * cell_size
 boat_height_1 = 1 * cell_size
 
@@ -107,10 +108,22 @@ def run_game():
             elif event.type == pygame.MOUSEMOTION:
                 if selected is not None:
                     mouse_x, mouse_y = event.pos
-                    boats[selected] = (mouse_x - offset_x, mouse_y - offset_y)
+                    # Calculate boundaries for the boat's movement within the cell size of the grid
+                    min_x = board_x
+                    max_x = board_x + board_width - (selected + 2) * cell_size
+                    min_y = board_y
+                    max_y = board_y + board_height - cell_size
+                    # Adjust the boat's position to stay within the cell size of the grid
+                    boat_x = min(max(round((mouse_x - offset_x - board_x) / cell_size) * cell_size + board_x, min_x),
+                                 max_x)
+                    boat_y = min(max(round((mouse_y - offset_y - board_y) / cell_size) * cell_size + board_y, min_y),
+                                 max_y)
+                    boats[selected] = (boat_x, boat_y)
+                # ...
 
         screen.fill(Fundal)  # Fill the screen with background color
         draw_board()  # Draw the board
+
         for i, (boat_x, boat_y) in enumerate(boats):
             if i == selected:
                 color = (255, 0, 0)  # Highlight the selected boat in red
