@@ -1,6 +1,34 @@
 import pygame
 from Importuri import *
-
+def rotate_boats(selected):
+    global boats
+    global boat_width_1
+    global boat_width_2
+    global boat_width_3
+    global boat_width_4
+    global boat_height_1
+    global boat_height_2
+    global boat_height_3
+    global boat_height_4
+    if selected is not None and 0 <= selected < len(boats):
+        boat_x, boat_y = boats[selected]
+        if selected == 0:
+            boat_width, boat_height = boat_width_1, boat_height_1
+            boat_width_1, boat_height_1 = boat_height, boat_width
+            boats[selected]= boat_width_1, boat_height_1
+        elif selected == 1:
+            boat_width, boat_height = boat_width_2, boat_height_2
+            boat_width_2, boat_height_2 = boat_height, boat_width
+            boats[selected] = boat_width_2, boat_height_2
+        elif selected == 2:
+            boat_width, boat_height = boat_width_3, boat_height_3
+            boat_width_3, boat_height_3 = boat_height, boat_width
+            boats[selected] = boat_width_3, boat_height_3
+        elif selected == 3:
+            boat_width, boat_height = boat_width_4, boat_height_4
+            boat_width_4, boat_height_4 = boat_height, boat_width
+            boats[selected] = boat_width_4, boat_height_4
+        boats[selected] = (boat_x, boat_y)
 def draw_board():
     for i in range(11):
         pygame.draw.line(screen, WHITE, (board_x + i * cell_size, board_y),
@@ -44,20 +72,36 @@ def run_game():
     global offset_x
     global offset_y
     timer()
+    button_font = pygame.font.Font(None, 36)
+    rotate_button = pygame.Rect(50, 50, 100, 50)
+    pygame.draw.rect(screen, (255, 0, 0), rotate_button)
+    button_text = button_font.render("Rotate", True, (255, 255, 255))
+    screen.blit(button_text, (60, 60))
+    last_one_tho=None
     move_board2()
     running = True
     while running:
+        button_font = pygame.font.Font(None, 36)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
+                print(mouse_x)
+                print(mouse_y) # pentru coordonate in matrice
                 for i, (boat_x, boat_y) in enumerate(boats):
                     if boat_x <= mouse_x <= boat_x+(i+2)*cell_size and boat_y <= mouse_y <= boat_y+cell_size : # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                         selected = i
+                        last_one_tho=selected
+                        print("barca")
+                        print(i)
                         offset_x = mouse_x - boat_x
                         offset_y = mouse_y - boat_y
+                if rotate_button.collidepoint(event.pos):
+                    print("seapasa")
+                    rotate_boats(last_one_tho)
             elif event.type == pygame.MOUSEBUTTONUP:
+                last_one_tho=selected
                 selected = None
             elif event.type == pygame.MOUSEMOTION:
                 if selected is not None:
@@ -73,10 +117,15 @@ def run_game():
                     boat_y = min(max(round((mouse_y - offset_y - board_y) / cell_size) * cell_size + board_y, min_y),
                                  max_y)
                     boats[selected] = (boat_x, boat_y)
-                # ...
+                    print(boat_x)
+                    print(boat_y)
 
+                # ...
         screen.fill(Fundal)  # funddalula
         draw_board()  # desenam
+        pygame.draw.rect(screen, (255, 0, 0), rotate_button)
+        button_text = button_font.render("Rotate", True, (255, 255, 255))
+        screen.blit(button_text, (60, 60))
         color_1=(65,84,178)
         color_2 = (58, 45, 240)
         color_3 = (232, 252, 56)
@@ -98,3 +147,5 @@ def run_game():
         pygame.display.flip()  # faceme update mere in running
 
     pygame.quit()
+
+
