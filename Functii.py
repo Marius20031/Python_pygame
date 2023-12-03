@@ -128,6 +128,21 @@ def run_game():
                         rotate_boats(last_one_tho)
                     if start_button.collidepoint(event.pos):
                         semafor_start_game=1
+                else:
+                    mouse_x, mouse_y = event.pos
+                    for i, (boat_x, boat_y) in enumerate(boats):
+                        # nu inteleg de ce functioneaza dar functioneaza efectiv....
+                        # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
+                        # daca fac 1*cellsize si (i+2) imi iau pe verticala
+                        #daca fac invers, imi ia pe orizontala
+                        if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
+                            selected = i
+                            last_one_tho=selected
+                            print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
+                            print(i)
+                            offset_x = mouse_x - boat_x
+                            offset_y = mouse_y - boat_y
+
             elif event.type == pygame.MOUSEBUTTONUP:
                 last_one_tho=selected
                 selected = None
@@ -176,8 +191,9 @@ def run_game():
                 pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
             elif i == 3:
                 pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
-        afisare_playeri() #scris de mn
-
+            afisare_playeri()  # scris de mn
         pygame.display.flip()  # faceme update mere in running
 
     pygame.quit()
+
+
