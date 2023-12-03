@@ -81,39 +81,52 @@ def run_game():
     timer()
     button_font = pygame.font.Font(None, 36)
     rotate_button = pygame.Rect(50, 50, 100, 50)
+    start_button = pygame.Rect(350, 50, 100, 50)
+
+    pygame.draw.rect(screen, (255, 0, 0), start_button)
     pygame.draw.rect(screen, (255, 0, 0), rotate_button)
+
     button_text = button_font.render("Rotate", True, (255, 255, 255))
+    button_text_1 = button_font.render("Start", True, (255, 255, 255))
+
     screen.blit(button_text, (60, 60))
+    screen.blit(button_text_1, (360, 60))
+
     last_one_tho=None
     move_board2()
     running = True
+    semafor_start_game = 0 # nu s.a apasat start
+
     while running:
         button_font = pygame.font.Font(None, 36)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_x, mouse_y = event.pos
-                # deci casuta stanga sus prima linie lrima coloana: 1,5-2,5| 7,5-8,5
-                # 1,5-2,5-3,5 pe x
-                #7,5-8,5 pe Y
-                print(mouse_x/cell_size)
-                print(mouse_y/cell_size) # pentru coordonate in matrice
-                for i, (boat_x, boat_y) in enumerate(boats):
-                    # nu inteleg de ce functioneaza dar functioneaza efectiv....
-                    # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
-                    # daca fac 1*cellsize si (i+2) imi iau pe verticala
-                    # daca fac invers, imi ia pe orizontala
-                    if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
-                        selected = i
-                        last_one_tho=selected
-                        print("barca")
-                        print(i)
-                        offset_x = mouse_x - boat_x
-                        offset_y = mouse_y - boat_y
-                if rotate_button.collidepoint(event.pos):
-                    #print("seapasa")
-                    rotate_boats(last_one_tho)
+                if(semafor_start_game==0):
+                    mouse_x, mouse_y = event.pos
+                    # deci casuta stanga sus prima linie lrima coloana: 1,5-2,5| 7,5-8,5
+                    # 1,5-2,5-3,5 pe x
+                    #7,5-8,5 pe Y
+                    print(mouse_x/cell_size)
+                    print(mouse_y/cell_size) # pentru coordonate in matrice
+                    for i, (boat_x, boat_y) in enumerate(boats):
+                        # nu inteleg de ce functioneaza dar functioneaza efectiv....
+                        # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
+                        # daca fac 1*cellsize si (i+2) imi iau pe verticala
+                        #daca fac invers, imi ia pe orizontala
+                        if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
+                            selected = i
+                            last_one_tho=selected
+                            print("barca")
+                            print(i)
+                            offset_x = mouse_x - boat_x
+                            offset_y = mouse_y - boat_y
+                    if rotate_button.collidepoint(event.pos):
+                        #print("seapasa")
+                        rotate_boats(last_one_tho)
+                    if start_button.collidepoint(event.pos):
+                        semafor_start_game=1
             elif event.type == pygame.MOUSEBUTTONUP:
                 last_one_tho=selected
                 selected = None
@@ -138,8 +151,13 @@ def run_game():
         screen.fill(Fundal)  # funddalula
         draw_board()  # desenam
         pygame.draw.rect(screen, (255, 0, 0), rotate_button)
+        pygame.draw.rect(screen, (255, 0, 0), start_button)
         button_text = button_font.render("Rotate", True, (255, 255, 255))
+        button_text_1 = button_font.render("Start", True, (255, 255, 255))
+
         screen.blit(button_text, (60, 60))
+        screen.blit(button_text_1, (360, 60))
+
         color_1=(65,84,178)
         color_2 = (58, 45, 240)
         color_3 = (232, 252, 56)

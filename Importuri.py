@@ -22,6 +22,9 @@ board2_x, board2_y = (width - board2_width) // 4 , (height - board2_height) // 2
 cell2_size = board2_width // 10
 # dimensiunea 2 pentru barci
 # Functia de desinare
+button_font = pygame.font.Font(None, 36)
+button_text = button_font.render("Start", True, (255, 255, 255))
+button_rect = pygame.Rect(50, 50, 100, 50)
 
 
 #--------------------------------
