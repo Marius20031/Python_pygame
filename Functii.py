@@ -127,6 +127,7 @@ def run_game():
                         #print("seapasa")
                         rotate_boats(last_one_tho)
                     if start_button.collidepoint(event.pos):
+                        print("CE PPPLMA")
                         semafor_start_game=1
                 else:
                     mouse_x, mouse_y = event.pos
@@ -140,29 +141,28 @@ def run_game():
                             last_one_tho=selected
                             print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
                             print(i)
-                            offset_x = mouse_x - boat_x
-                            offset_y = mouse_y - boat_y
-
+                            #offset_x = mouse_x - boat_x
+                            #offset_y = mouse_y - boat_y
             elif event.type == pygame.MOUSEBUTTONUP:
                 last_one_tho=selected
                 selected = None
             elif event.type == pygame.MOUSEMOTION:
-                if selected is not None:
-                    mouse_x, mouse_y = event.pos
-                    # calcule
-                    min_x = board_x
-                    max_x = board_x +board_width - boat_width_VECT[selected]*cell_size
-                    min_y = board_y
-                    max_y = board_y + board_height - boat_height_VECT[selected]*cell_size
-                    # ajustarea pozitiei
-                    boat_x = min(max(round((mouse_x - offset_x - board_x) / cell_size) * cell_size + board_x, min_x),
-                                 max_x)
-                    boat_y = min(max(round((mouse_y - offset_y - board_y) / cell_size) * cell_size + board_y, min_y),
-                                 max_y)
-                    boats[selected] = (boat_x, boat_y)
-                    print(boat_x)
-                    print(boat_y)
-
+                if(semafor_start_game==0):
+                    if selected is not None:
+                        mouse_x, mouse_y = event.pos
+                        # calcule
+                        min_x = board_x
+                        max_x = board_x +board_width - boat_width_VECT[selected]*cell_size
+                        min_y = board_y
+                        max_y = board_y + board_height - boat_height_VECT[selected]*cell_size
+                        # ajustarea pozitiei
+                        boat_x = min(max(round((mouse_x - offset_x - board_x) / cell_size) * cell_size + board_x, min_x),
+                                     max_x)
+                        boat_y = min(max(round((mouse_y - offset_y - board_y) / cell_size) * cell_size + board_y, min_y),
+                                     max_y)
+                        boats[selected] = (boat_x, boat_y)
+                        print(boat_x)
+                        print(boat_y)
                 # ...
         screen.fill(Fundal)  # funddalula
         draw_board()  # desenam
