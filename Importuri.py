@@ -38,7 +38,7 @@ boat_height_3 = 1 * cell_size
 boat_width_4 = 5 * cell_size
 boat_height_4 = 1 * cell_size
 
-# pozitia initialal a barcilor
+# pozitia initialal a barcilor !!! deci nu aici modific pentru a modifica size.ul barcilor
 boats = [
     (2 * cell_size, 1 * cell_size),
     (3 * cell_size, 2 * cell_size),
@@ -46,6 +46,16 @@ boats = [
     (5 * cell_size, 4 * cell_size)
 ]
 
+# boats_size e aia importanta
+boats_size = [
+    (1 * cell_size, 2 * cell_size),
+    (1 * cell_size, 3 * cell_size),
+    (1 * cell_size, 4 * cell_size),
+    (1 * cell_size, 5 * cell_size)
+]
+
+boat_width_VECT=[2,3,4,5]
+boat_height_VECT=[1,1,1,1]
 # Dvarialbilele follsite pentru drag and drop
 selected = None
 offset_x = 0
