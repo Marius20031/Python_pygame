@@ -1,5 +1,6 @@
 import pygame
 from Importuri import *
+from importuri_bgd import *
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -190,7 +191,7 @@ def run_game():
                 pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
             elif i == 3:
                 pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
-
+            afisare_playeri()  # scris de mn
         pygame.display.flip()  # faceme update mere in running
 
     pygame.quit()
