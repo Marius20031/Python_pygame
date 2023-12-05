@@ -133,7 +133,7 @@ def run_game():
                 print(mouse_x / cell_size)
                 print(mouse_y / cell_size)  # pentru coordonate in matrice
                 if(semafor_start_game==0):
-                    mouse_x, mouse_y = event.pos
+                    #mouse_x, mouse_y = event.pos
                     # deci casuta stanga sus prima linie lrima coloana: 1,5-2,5| 7,5-8,5
                     # 1,5-2,5-3,5 pe x
                     #7,5-8,5 pe Y
@@ -161,6 +161,18 @@ def run_game():
                             semafor_start_game=1
                 else:
                     mouse_x, mouse_y = event.pos
+                    print("------------------------")
+                    for x in range(15, 120, 10):
+                        for q in range(75, 180, 10):
+                            x=float(x/10)
+                            q=float(q/10)
+                            if x <= mouse_x / cell_size and mouse_x / cell_size <= x + 1 and q <= mouse_y / cell_size and mouse_y / cell_size <= q + 1:
+                                print(x)
+                                print(q)
+                                # a gasit poz in matrice si e pozitia
+                                mat[int(q - 7.5)][int(x - 1.5)] = 2
+                            x = x * 10
+                            q = q * 10
                     for i, (boat_x, boat_y) in enumerate(boats):
                         # nu inteleg de ce functioneaza dar functioneaza efectiv....
                         # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -169,14 +181,12 @@ def run_game():
                         if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                             selected = i
                             last_one_tho=selected
-                            var_x=int(np.floor(mouse_x/cell_size))
-                            var_y=int(np.floor(mouse_y/cell_size))
-                            mat[var_x-2][var_y-8]=2;
+                            # cum convertesc din
                             print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
                             print(i)
-                            print(mat)
                             #offset_x = mouse_x - boat_x
                             #offset_y = mouse_y - boat_y
+                    print(mat)
             elif event.type == pygame.MOUSEBUTTONUP:
                 last_one_tho=selected
                 selected = None
