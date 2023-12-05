@@ -2,8 +2,10 @@ import pygame
 from Importuri import *
 from runde import *
 import numpy as np
+from bot import *
 from importuri_bgd import *
-circle_color = (255, 0, 0)
+circle_color_rosu = (255, 0, 0)
+circle_color_verde = (0, 128, 0)
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -125,6 +127,8 @@ def run_game():
     move_board2()
     running = True
     semafor_start_game = 0 # nu s.a apasat start
+    if jucam_cu_bot[0]==1:
+        creare_matrice_barci_poz()
     while running:
         button_font = pygame.font.Font(None, 36)
         for event in pygame.event.get():
@@ -175,7 +179,9 @@ def run_game():
                         runda_player_main(mouse_x,mouse_y)
                     # matricea adversarului
                     else:
-                        runda_adversar(mouse_x,mouse_y)
+                        if  jucam_cu_bot[0]==1:
+                            runda_bot(mouse_x, mouse_y)
+                            #runda_adversar(mouse_x,mouse_y)
 
                     for i, (boat_x, boat_y) in enumerate(boats):
                         # nu inteleg de ce functioneaza dar functioneaza efectiv....
@@ -243,7 +249,9 @@ def run_game():
         if merge[0]==0:
             error_boats_not_in_correct_position()
         for uwu in range(0, nr_total_cercuri[0]):
-            pygame.draw.circle(screen, circle_color, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
+            if tupla_ai_nimerit[uwu]:
+                pygame.draw.circle(screen, circle_color_verde, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
+            else:
+                pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)
         pygame.display.flip()  # faceme update mere in running
-
     pygame.quit()
