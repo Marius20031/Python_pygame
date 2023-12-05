@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 # Inceputul
 pygame.init()
 
@@ -26,7 +27,7 @@ button_font = pygame.font.Font(None, 36)
 button_text = button_font.render("Start", True, (255, 255, 255))
 button_rect = pygame.Rect(50, 50, 100, 50)
 
-
+mat = np.zeros((10, 10))
 #--------------------------------
 
 boat_width_1 = 2 * cell_size

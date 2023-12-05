@@ -1,5 +1,6 @@
 import pygame
 from Importuri import *
+import numpy as np
 from importuri_bgd import *
 def rotate_boats(selected):
     #global boats
@@ -84,11 +85,17 @@ def get_valid_pozitiei_barci():
             for w, (boat_x, boat_y) in enumerate(boats):
                 if boat_x <= i*cell_size <= boat_x + boat_width_VECT[w] * cell_size and boat_y <= j*cell_size <= boat_y + boat_height_VECT[w] * cell_size:
                     var=var+1
+                    mat[j-8][i-2]=1
                     break
     print("barcile sunt vazute ca:")
     print(var)
     if var == 14:
+        print(mat)
         return 1
+    for i in range(0, 10):
+        for j in range(0, 10):
+            mat[i][j]=0
+    #mat = np.zeros((10, 10))
     return 0
 
 
