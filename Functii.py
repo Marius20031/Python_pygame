@@ -1,7 +1,9 @@
 import pygame
 from Importuri import *
+from runde import *
 import numpy as np
 from importuri_bgd import *
+circle_color = (255, 0, 0)
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -122,7 +124,6 @@ def run_game():
     move_board2()
     running = True
     semafor_start_game = 0 # nu s.a apasat start
-
     while running:
         button_font = pygame.font.Font(None, 36)
         for event in pygame.event.get():
@@ -161,18 +162,12 @@ def run_game():
                             semafor_start_game=1
                 else:
                     mouse_x, mouse_y = event.pos
-                    print("------------------------")
-                    for x in range(15, 120, 10):
-                        for q in range(75, 180, 10):
-                            x=float(x/10)
-                            q=float(q/10)
-                            if x <= mouse_x / cell_size and mouse_x / cell_size <= x + 1 and q <= mouse_y / cell_size and mouse_y / cell_size <= q + 1:
-                                print(x)
-                                print(q)
-                                # a gasit poz in matrice si e pozitia
-                                mat[int(q - 7.5)][int(x - 1.5)] = 2
-                            x = x * 10
-                            q = q * 10
+                    if al_cui_e_randul[0]==1:
+                        runda_player_main(mouse_x,mouse_y)
+                    # matricea adversarului
+                    else:
+                        runda_adversar(mouse_x,mouse_y)
+
                     for i, (boat_x, boat_y) in enumerate(boats):
                         # nu inteleg de ce functioneaza dar functioneaza efectiv....
                         # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -186,7 +181,6 @@ def run_game():
                             print(i)
                             #offset_x = mouse_x - boat_x
                             #offset_y = mouse_y - boat_y
-                    print(mat)
             elif event.type == pygame.MOUSEBUTTONUP:
                 last_one_tho=selected
                 selected = None
@@ -214,7 +208,6 @@ def run_game():
         pygame.draw.rect(screen, (255, 0, 0), start_button)
         button_text = button_font.render("Rotate", True, (255, 255, 255))
         button_text_1 = button_font.render("Start", True, (255, 255, 255))
-
         screen.blit(button_text, (60, 60))
         screen.blit(button_text_1, (360, 60))
 
@@ -236,6 +229,8 @@ def run_game():
             elif i == 3:
                 pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
             afisare_playeri()  # scris de mn
+        for uwu in range(0, nr_total_cercuri[0]):
+            pygame.draw.circle(screen, circle_color, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
         pygame.display.flip()  # faceme update mere in running
 
     pygame.quit()

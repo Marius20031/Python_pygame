@@ -28,6 +28,7 @@ button_text = button_font.render("Start", True, (255, 255, 255))
 button_rect = pygame.Rect(50, 50, 100, 50)
 
 mat = np.zeros((10, 10))
+mat_adversar = np.zeros((10, 10))
 #--------------------------------
 
 boat_width_1 = 2 * cell_size
@@ -64,4 +65,8 @@ boat_height_VECT=[1,1,1,1]
 selected = None
 offset_x = 0
 offset_y = 0
-
+# vreau sa implementez sa stie adversarul ca a lovit 2 boat-uri
+# variabile reprezentative entru frunctioneara corecta
+al_cui_e_randul=[0]  # incepe playerul
+nr_total_cercuri=[0]
+tupla_cu_cercuri = np.zeros((50, 2))
