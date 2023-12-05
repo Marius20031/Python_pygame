@@ -169,8 +169,12 @@ def run_game():
                         if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                             selected = i
                             last_one_tho=selected
+                            var_x=int(np.floor(mouse_x/cell_size))
+                            var_y=int(np.floor(mouse_y/cell_size))
+                            mat[var_x-2][var_y-8]=2;
                             print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
                             print(i)
+                            print(mat)
                             #offset_x = mouse_x - boat_x
                             #offset_y = mouse_y - boat_y
             elif event.type == pygame.MOUSEBUTTONUP:
