@@ -107,6 +107,7 @@ def run_game():
     global offset_x
     global offset_y
     timer()
+    afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
     button_font = pygame.font.Font(None, 36)
     rotate_button = pygame.Rect(50, 50, 100, 50)
     start_button = pygame.Rect(350, 50, 100, 50)
@@ -158,8 +159,16 @@ def run_game():
                     if start_button.collidepoint(event.pos):
                         print("NU E GATA")
                         if get_valid_pozitiei_barci()==1:
+                            merge[0]=1
                             print("E GATA")
                             semafor_start_game=1
+                        else: merge[0]=0
+                    # adaugat de mn incepand de aici
+                    if text_rect8.collidepoint(event.pos):
+                        shift_right_icon()
+                    if text_rect9.collidepoint(event.pos):
+                        shift_left_icon()
+                    # pana aici
                 else:
                     mouse_x, mouse_y = event.pos
                     if al_cui_e_randul[0]==1:
@@ -228,11 +237,13 @@ def run_game():
                 pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
             elif i == 3:
                 pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
-            afisare_playeri()  # scris de mn
+        afisare_playeri()  # scris de mn
+        if (semafor_start_game == 0): #scris de mn
+            afisare_barci()
+        if merge[0]==0:
+            error_boats_not_in_correct_position()
         for uwu in range(0, nr_total_cercuri[0]):
             pygame.draw.circle(screen, circle_color, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
         pygame.display.flip()  # faceme update mere in running
 
     pygame.quit()
-
-
