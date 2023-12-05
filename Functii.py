@@ -1,6 +1,9 @@
 import pygame
 from Importuri import *
+from runde import *
+import numpy as np
 from importuri_bgd import *
+circle_color = (255, 0, 0)
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -73,6 +76,30 @@ def timer():
     for i in range(3, 0, -1):
         show_timer(i)
         pygame.time.wait(1000)
+def get_valid_pozitiei_barci():
+    # TO DO:
+    # iteresz prin fiecare pozitie din boats[i] (i=0:3)
+    # daca e una sub alta, ERROR Boats not valid!!
+    var=0;
+    # iterez
+    for i in range(2,12):
+        for j in range(8,18):
+            for w, (boat_x, boat_y) in enumerate(boats):
+                if boat_x <= i*cell_size <= boat_x + boat_width_VECT[w] * cell_size and boat_y <= j*cell_size <= boat_y + boat_height_VECT[w] * cell_size:
+                    var=var+1
+                    mat[j-8][i-2]=1
+                    break
+    print("barcile sunt vazute ca:")
+    print(var)
+    if var == 14:
+        print(mat)
+        return 1
+    for i in range(0, 10):
+        for j in range(0, 10):
+            mat[i][j]=0
+    #mat = np.zeros((10, 10))
+    return 0
+
 
 # Main function to run the game
 def run_game():
@@ -80,6 +107,7 @@ def run_game():
     global offset_x
     global offset_y
     timer()
+    afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
     button_font = pygame.font.Font(None, 36)
     rotate_button = pygame.Rect(50, 50, 100, 50)
     start_button = pygame.Rect(350, 50, 100, 50)
@@ -97,20 +125,22 @@ def run_game():
     move_board2()
     running = True
     semafor_start_game = 0 # nu s.a apasat start
-
     while running:
         button_font = pygame.font.Font(None, 36)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = event.pos
+                print(mouse_x / cell_size)
+                print(mouse_y / cell_size)  # pentru coordonate in matrice
                 if(semafor_start_game==0):
-                    mouse_x, mouse_y = event.pos
+                    #mouse_x, mouse_y = event.pos
                     # deci casuta stanga sus prima linie lrima coloana: 1,5-2,5| 7,5-8,5
                     # 1,5-2,5-3,5 pe x
                     #7,5-8,5 pe Y
-                    print(mouse_x/cell_size)
-                    print(mouse_y/cell_size) # pentru coordonate in matrice
+                    #print(mouse_x/cell_size)
+                    #print(mouse_y/cell_size) # pentru coordonate in matrice
                     for i, (boat_x, boat_y) in enumerate(boats):
                         # nu inteleg de ce functioneaza dar functioneaza efectiv....
                         # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -127,10 +157,26 @@ def run_game():
                         #print("seapasa")
                         rotate_boats(last_one_tho)
                     if start_button.collidepoint(event.pos):
-                        print("CE PPPLMA")
-                        semafor_start_game=1
+                        print("NU E GATA")
+                        if get_valid_pozitiei_barci()==1:
+                            merge[0]=1
+                            print("E GATA")
+                            semafor_start_game=1
+                        else: merge[0]=0
+                    # adaugat de mn incepand de aici
+                    if text_rect8.collidepoint(event.pos):
+                        shift_right_icon()
+                    if text_rect9.collidepoint(event.pos):
+                        shift_left_icon()
+                    # pana aici
                 else:
                     mouse_x, mouse_y = event.pos
+                    if al_cui_e_randul[0]==1:
+                        runda_player_main(mouse_x,mouse_y)
+                    # matricea adversarului
+                    else:
+                        runda_adversar(mouse_x,mouse_y)
+
                     for i, (boat_x, boat_y) in enumerate(boats):
                         # nu inteleg de ce functioneaza dar functioneaza efectiv....
                         # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -139,6 +185,7 @@ def run_game():
                         if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                             selected = i
                             last_one_tho=selected
+                            # cum convertesc din
                             print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
                             print(i)
                             #offset_x = mouse_x - boat_x
@@ -170,7 +217,6 @@ def run_game():
         pygame.draw.rect(screen, (255, 0, 0), start_button)
         button_text = button_font.render("Rotate", True, (255, 255, 255))
         button_text_1 = button_font.render("Start", True, (255, 255, 255))
-
         screen.blit(button_text, (60, 60))
         screen.blit(button_text_1, (360, 60))
 
@@ -191,9 +237,13 @@ def run_game():
                 pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
             elif i == 3:
                 pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
-            afisare_playeri()  # scris de mn
+        afisare_playeri()  # scris de mn
+        if (semafor_start_game == 0): #scris de mn
+            afisare_barci()
+        if merge[0]==0:
+            error_boats_not_in_correct_position()
+        for uwu in range(0, nr_total_cercuri[0]):
+            pygame.draw.circle(screen, circle_color, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
         pygame.display.flip()  # faceme update mere in running
 
     pygame.quit()
-
-

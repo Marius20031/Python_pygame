@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 # Inceputul
 pygame.init()
 
@@ -26,7 +27,8 @@ button_font = pygame.font.Font(None, 36)
 button_text = button_font.render("Start", True, (255, 255, 255))
 button_rect = pygame.Rect(50, 50, 100, 50)
 
-
+mat = np.zeros((10, 10))
+mat_adversar = np.zeros((10, 10))
 #--------------------------------
 
 boat_width_1 = 2 * cell_size
@@ -43,11 +45,17 @@ boat_height_4 = 1 * cell_size
 
 # pozitia initialal a barcilor !!! deci nu aici modific pentru a modifica size.ul barcilor
 boats = [
-    (2 * cell_size, 1 * cell_size),
-    (3 * cell_size, 2 * cell_size),
-    (4 * cell_size, 3 * cell_size),
-    (5 * cell_size, 4 * cell_size)
+    (4 * cell_size, 19 * cell_size),
+    (4 * cell_size, 20 * cell_size),
+    (4 * cell_size, 21 * cell_size),
+    (4 * cell_size, 22 * cell_size)
 ]
+#boats = [
+#    (2 * cell_size, 1 * cell_size),
+#    (3 * cell_size, 2 * cell_size),
+#    (4 * cell_size, 3 * cell_size),
+#    (5 * cell_size, 4 * cell_size)
+#]
 
 # boats_size e aia importanta
 boats_size = [
@@ -63,4 +71,10 @@ boat_height_VECT=[1,1,1,1]
 selected = None
 offset_x = 0
 offset_y = 0
-
+# vreau sa implementez sa stie adversarul ca a lovit 2 boat-uri
+# variabile reprezentative entru frunctioneara corecta
+al_cui_e_randul=[0]  # incepe playerul
+nr_total_cercuri=[0]
+tupla_cu_cercuri = np.zeros((50, 2))
+# afisare eroare
+merge=[1]
