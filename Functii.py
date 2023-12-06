@@ -132,8 +132,8 @@ def run_game():
     move_board2()
     running = True
     semafor_start_game = 0 # nu s.a apasat start
-    if jucam_cu_bot[0]==1:
-        creare_matrice_barci_poz()
+    #if jucam_cu_bot[0]==1:
+    creare_matrice_barci_poz()
     while running:
         global nr_sec
         button_font = pygame.font.Font(None, 36)
