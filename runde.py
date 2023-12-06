@@ -8,6 +8,7 @@ import pygame
 import numpy as np
 global al_cui_e_randul
 def runda_player_main(mouse_x,mouse_y):
+    global nr_sec
     print("------------------------")
     #asta e de facpt ce face botul
     ok=1;
@@ -34,6 +35,7 @@ def runda_player_main(mouse_x,mouse_y):
                     nr_total_cercuri[0] += 1  # ca sa iau range
                     al_cui_e_randul[0]=nu # mai da o data
                     print("eok")
+                    nr_sec[0]=30
             x = x * 10
             q = q * 10
     print("adversar")
@@ -41,6 +43,7 @@ def runda_player_main(mouse_x,mouse_y):
         print("mutare invalida aka apasa random ")
     print(mat)
 def runda_adversar(mouse_x,mouse_y):
+    global nr_sec
     print("------------------------")
     #global al_cui_e_randul
     for x in range(130, 220, 10):
@@ -61,6 +64,7 @@ def runda_adversar(mouse_x,mouse_y):
                     tupla_cu_cercuri[nr_total_cercuri[0]][1]=(2 * q + 1) / 2 * cell_size
                     nr_total_cercuri[0] += 1 # ca sa iau range
                     al_cui_e_randul[0]= 1
+                    nr_sec[0]=30
             x = x * 10
             q = q * 10
     print("player")

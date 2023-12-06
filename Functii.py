@@ -104,6 +104,8 @@ def get_valid_pozitiei_barci():
     #mat = np.zeros((10, 10))
     return 0
 
+global trebuie_timer#adaugat de mn
+trebuie_timer=[0]
 
 # Main function to run the game
 def run_game():
@@ -124,6 +126,7 @@ def run_game():
 
     screen.blit(button_text, (60, 60))
     screen.blit(button_text_1, (360, 60))
+    global trebuie_timer  # scris de mn
 
     last_one_tho=None
     move_board2()
@@ -132,6 +135,7 @@ def run_game():
     if jucam_cu_bot[0]==1:
         creare_matrice_barci_poz()
     while running:
+        global nr_sec
         button_font = pygame.font.Font(None, 36)
         if joc_e_gata[0]==0:
             if jucam_cu_bot[0]==1:
@@ -139,6 +143,7 @@ def run_game():
                     bot_alege_pozitie()
                     random_time_sleep=random.randint(1,3)
                     time.sleep(2)
+                    trebuie_timer[0] = 0
                     # aici e botul de fapt
                     runda_player_main(var_x[0], var_y[0])
                     if check_if_game_over() == 1:
@@ -146,6 +151,16 @@ def run_game():
                         joc_e_gata[0] = 1
                     #if check_if_game_over()==1
         for event in pygame.event.get():
+            while (trebuie_timer[0] == 1):  # incepe timeru cand e nevoie de el
+                event2 = incepe_timer(al_cui_e_randul[0], trebuie_timer, nr_sec)
+                event = event2
+                if event == None:
+                    trebuie_timer[0] = 1
+                    if al_cui_e_randul[0] == 0:
+                        al_cui_e_randul[0] = 1
+                    else:
+                        al_cui_e_randul[0] = 0
+            #implementata pentru player
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -181,6 +196,7 @@ def run_game():
                                 merge[0]=1
                                 print("E GATA")
                                 semafor_start_game=1
+                                trebuie_timer[0] = 1  # adaugat de mn
                             else: merge[0]=0
                         # adaugat de mn incepand de aici
                         if text_rect8.collidepoint(event.pos):
@@ -205,6 +221,7 @@ def run_game():
                                 runda_bot(mouse_x, mouse_y)
                             else:
                                 runda_player_main(mouse_x,mouse_y)
+                            trebuie_timer[0] = 1  # adaugat de mn
                         #   if jucam_cu_bot[0]==1:
                                 #bot_alege_pozitie()
                                 #print("ce plms")
@@ -246,6 +263,7 @@ def run_game():
                         print(boat_y)
                 # ...
         screen.fill(Fundal)  # funddalula
+        show_background() #bogdan
         draw_board()  # desenam
         pygame.draw.rect(screen, (255, 0, 0), rotate_button)
         pygame.draw.rect(screen, (255, 0, 0), start_button)
@@ -276,10 +294,15 @@ def run_game():
             afisare_barci()
         if merge[0]==0:
             error_boats_not_in_correct_position()
+        afisare_contur_timer()
+        afisare_timer_default()
         for uwu in range(0, nr_total_cercuri[0]):
             if tupla_ai_nimerit[uwu]:
-                pygame.draw.circle(screen, circle_color_verde, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
+                global explozie
+                screen.blit(explozie, (tupla_cu_cercuri[uwu][0] - 30, tupla_cu_cercuri[uwu][1] - 30))
+                #pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)
+                #
             else:
-                pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)
+                pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)  # are prioritate mai mare
         pygame.display.flip()  # faceme update mere in running
     pygame.quit()
