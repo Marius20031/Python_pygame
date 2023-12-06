@@ -9,6 +9,7 @@ import numpy as np
 global al_cui_e_randul
 def runda_player_main(mouse_x,mouse_y):
     print("------------------------")
+    #asta e de facpt ce face botul
     ok=1;
     #global al_cui_e_randul
     for x in range(15, 120, 10):

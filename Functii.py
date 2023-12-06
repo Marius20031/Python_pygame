@@ -1,3 +1,5 @@
+import time
+
 import pygame
 from Importuri import *
 from runde import *
@@ -131,6 +133,12 @@ def run_game():
         creare_matrice_barci_poz()
     while running:
         button_font = pygame.font.Font(None, 36)
+        if al_cui_e_randul[0] == 1:
+            bot_alege_pozitie()
+            random_time_sleep=random.randint(1,3)
+            time.sleep(2)
+            # aici e botul de fapt
+            runda_player_main(var_x[0], var_y[0])
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -175,12 +183,18 @@ def run_game():
                     # pana aici
                 else:
                     mouse_x, mouse_y = event.pos
-                    if al_cui_e_randul[0]==1:
-                        runda_player_main(mouse_x,mouse_y)
-                    # matricea adversarului
-                    else:
-                        if  jucam_cu_bot[0]==1:
+                    # nu mai asteptam event poze daca jucam cu bot!
+                    #if al_cui_e_randul[0]==1:
+                    if jucam_cu_bot[0] == 1:
+                        if al_cui_e_randul[0]==0:
                             runda_bot(mouse_x, mouse_y)
+                        # si intra direct mutarea botului
+                    # matricea adversarului
+                    #else:
+                     #   if jucam_cu_bot[0]==1:
+                            #bot_alege_pozitie()
+                            #print("ce plms")
+                      #      runda_bot(mouse_x, mouse_y)
                             #runda_adversar(mouse_x,mouse_y)
 
                     for i, (boat_x, boat_y) in enumerate(boats):

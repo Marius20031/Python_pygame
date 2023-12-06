@@ -1,3 +1,4 @@
+from asyncio import sleep
 from random import random
 import pygame
 from Importuri import *
@@ -58,3 +59,23 @@ def creare_matrice_barci_poz():
     #functie_reapelata_pt_randomizare
     #functie_reapelata_pt_randomizare
     print(mat_adversar)
+def bot_alege_pozitie():
+    ok=0
+    if alege_first_time[0]==1:
+        #sleep(3)
+        alege_first_time[0]=0
+        # aleg random o pozitie de pe matrice
+        var_x[0] = random.randint(0, 9)
+        var_y[0] = random.randint(0,9)
+        var_x[0]=(var_x[0]+1.5)*cell_size+0.2
+        var_y[0]=(var_y[0]+7.5) * cell_size+0.2
+        #runda_player_main(var_x*cell_size+v)
+    else:
+        while(ok==0):
+            var_x[0] = random.randint(0, 9)
+            var_y[0] = random.randint(0, 9)
+            if (mat[var_y[0]][var_x[0]]!=2):
+                # am lovit.o deja
+                ok=1
+            var_x[0] = (var_x[0] + 1.5) * cell_size + 0.2
+            var_y[0] = (var_y[0] + 7.5) * cell_size + 0.2
