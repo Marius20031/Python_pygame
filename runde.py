@@ -39,7 +39,7 @@ def runda_player_main(mouse_x,mouse_y):
     print("adversar")
     if al_cui_e_randul[0]==1:
         print("mutare invalida aka apasa random ")
-    #print(mat)
+    print(mat)
 def runda_adversar(mouse_x,mouse_y):
     print("------------------------")
     #global al_cui_e_randul
@@ -66,7 +66,7 @@ def runda_adversar(mouse_x,mouse_y):
     print("player")
     if al_cui_e_randul[0]==0:
         print("mutare invalida aka apasa random ")
-    #print(mat_adversar)
+    print(mat_adversar)
 
 def runda_bot(mouse_x,mouse_y):
     print("------------------------")
@@ -98,4 +98,26 @@ def runda_bot(mouse_x,mouse_y):
     print("player")
     if al_cui_e_randul[0]==0:
         print("mutare invalida aka apasa random ")
-    #print(mat_adversar)
+    print(mat_adversar)
+def check_if_game_over():
+    # verific atat matricea pt bot cat si matricea pentru player
+    var_1=1;# termina player
+    var_2=2;#termina bot/inamic
+    # daca nu mai sunt 1 in matrice
+    for i in range(0,9):
+        for j in range(0,9):
+            if(mat[i][j]==1):
+                var_1=0;
+                # nu a terminat player_1
+    for i in range(0, 9):
+        for j in range(0, 9):
+            if (mat_adversar[i][j] == 1):
+                var_2= 0;
+    if var_1==1:
+        return var_1
+    if var_2==2:
+        return var_2
+    return 0
+    # 1 a terminat 1
+    # 2 a terminat bot/adversar
+    # 0 nu a temrinat nimeni

@@ -75,8 +75,8 @@ offset_y = 0
 # variabile reprezentative entru frunctioneara corecta
 al_cui_e_randul=[0]  # incepe playerul
 nr_total_cercuri=[0]
-tupla_cu_cercuri = np.zeros((51, 2))
-tupla_ai_nimerit=np.zeros(51)
+tupla_cu_cercuri = np.zeros((551, 2))
+tupla_ai_nimerit=np.zeros(551)
 # afisare eroare
 merge=[1]
 jucam_cu_bot=[1]
@@ -84,3 +84,5 @@ tin_randomizarea=[-1,-1,-1,-1]
 alege_first_time=[1]
 var_x=[0]
 var_y=[0]
+joc_e_gata=[0]
+botul_nu_iarta=[0,0]
