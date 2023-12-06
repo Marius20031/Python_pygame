@@ -2,10 +2,8 @@ import pygame
 from Importuri import *
 from runde import *
 import numpy as np
-from bot import *
 from importuri_bgd import *
-circle_color_rosu = (255, 0, 0)
-circle_color_verde = (0, 128, 0)
+circle_color = (255, 0, 0)
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -102,7 +100,8 @@ def get_valid_pozitiei_barci():
     #mat = np.zeros((10, 10))
     return 0
 
-
+global trebuie_timer#adaugat de mn
+trebuie_timer=[0]
 # Main function to run the game
 def run_game():
     global selected
@@ -122,17 +121,27 @@ def run_game():
 
     screen.blit(button_text, (60, 60))
     screen.blit(button_text_1, (360, 60))
+    global trebuie_timer #scris de mn
 
     last_one_tho=None
     move_board2()
     running = True
     semafor_start_game = 0 # nu s.a apasat start
-    if jucam_cu_bot[0]==1:
-        creare_matrice_barci_poz()
     while running:
+        global nr_sec
         button_font = pygame.font.Font(None, 36)
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            while (trebuie_timer[0]==1): # incepe timeru cand e nevoie de el
+                event2=incepe_timer(al_cui_e_randul[0],trebuie_timer,nr_sec)
+                event=event2
+                if event==None:
+                    trebuie_timer[0]=1
+                    if al_cui_e_randul[0]==0:
+                        al_cui_e_randul[0]=1
+                    else:
+                        al_cui_e_randul[0]=0
+
+            if event.type == pygame.QUIT:#pana aici scris de mn, era doar if inainte
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
@@ -166,6 +175,7 @@ def run_game():
                             merge[0]=1
                             print("E GATA")
                             semafor_start_game=1
+                            trebuie_timer[0]=1#adaugat de mn
                         else: merge[0]=0
                     # adaugat de mn incepand de aici
                     if text_rect8.collidepoint(event.pos):
@@ -177,12 +187,11 @@ def run_game():
                     mouse_x, mouse_y = event.pos
                     if al_cui_e_randul[0]==1:
                         runda_player_main(mouse_x,mouse_y)
+                        trebuie_timer[0]=1#adaugat de mn
                     # matricea adversarului
                     else:
-                        if  jucam_cu_bot[0]==1:
-                            runda_bot(mouse_x, mouse_y)
-                            #runda_adversar(mouse_x,mouse_y)
-
+                        runda_adversar(mouse_x,mouse_y)
+                        trebuie_timer[0]=1#adaugat de mn
                     for i, (boat_x, boat_y) in enumerate(boats):
                         # nu inteleg de ce functioneaza dar functioneaza efectiv....
                         # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -218,6 +227,7 @@ def run_game():
                         print(boat_y)
                 # ...
         screen.fill(Fundal)  # funddalula
+        show_background()
         draw_board()  # desenam
         pygame.draw.rect(screen, (255, 0, 0), rotate_button)
         pygame.draw.rect(screen, (255, 0, 0), start_button)
@@ -248,10 +258,12 @@ def run_game():
             afisare_barci()
         if merge[0]==0:
             error_boats_not_in_correct_position()
+        afisare_contur_timer()
+        afisare_timer_default()
         for uwu in range(0, nr_total_cercuri[0]):
-            if tupla_ai_nimerit[uwu]:
-                pygame.draw.circle(screen, circle_color_verde, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
-            else:
-                pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)
+            #pygame.draw.circle(screen, circle_color, tupla_cu_cercuri[uwu], 5) # are prioritate mai mare
+            global explozie
+            screen.blit(explozie,(tupla_cu_cercuri[uwu][0]-30,tupla_cu_cercuri[uwu][1]-30))
         pygame.display.flip()  # faceme update mere in running
+
     pygame.quit()
