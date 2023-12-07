@@ -7,7 +7,7 @@ import numpy as np
 from importuri_bgd import *
 
 def functie_reapelata_pt_randomizare():
-    #print("aaaaaaaaaaaaaaa??")
+    ###print("aaaaaaaaaaaaaaa??")
     # folosim matrice adversar
     # cu random o sa imi aleg o linie de la 1 la 10:
 
@@ -22,19 +22,19 @@ def functie_reapelata_pt_randomizare():
     # mi.a genera o linie si o coloana, acum ma intereseaza daca e destul de mare
     # daca e destul cat sa se puna pe orizontala o sa adaug diferenta daca nu, ramane asa si testam:
     # verific coloana
-    #print("wtf?")
+    ###print("wtf?")
     for v in range(0,4):
         if dimensiune==tin_randomizarea[v]:
             return 0
     if random_number_coloana+dimensiune > 9: #fixed bug
         random_number_coloana = 9 - dimensiune
-    #print("wtf?")
+    ###print("wtf?")
     #var_finala = random.randint(random_number_2, random_number_1)
     for i in range(0, dimensiune):
         # ca sa ma asigur ca e random random
         if mat_adversar[random_number_1][random_number_coloana+i]==1:
             return 0
-    #print("wtf?")
+    ###print("wtf?")
     for i in range(0, dimensiune):
         mat_adversar[random_number_1][random_number_coloana + i] = 1
     # ok urmatoarea vreau sa fie pe verticala
@@ -43,8 +43,8 @@ def functie_reapelata_pt_randomizare():
         if tin_randomizarea[i]==-1:
             tin_randomizarea[i] = dimensiune
             break
-    print("-----------------------------")
-    print(mat_adversar)
+    ##print("-----------------------------")
+    ###print(mat_adversar)
     return 1 # a mers
 def creare_matrice_barci_poz():
     var=0
@@ -60,7 +60,7 @@ def creare_matrice_barci_poz():
     #functie_reapelata_pt_randomizare
     #functie_reapelata_pt_randomizare
     #functie_reapelata_pt_randomizare
-    print(mat_adversar)
+    ##print(mat_adversar)
 def bot_alege_pozitie():
     ok=0
     if alege_first_time[0]==1:

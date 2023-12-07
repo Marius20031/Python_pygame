@@ -93,10 +93,10 @@ def get_valid_pozitiei_barci():
                     var=var+1
                     mat[j-8][i-2]=1
                     break
-    print("barcile sunt vazute ca:")
-    print(var)
+    #print("barcile sunt vazute ca:")
+    #print(var)
     if var == 14:
-        print(mat)
+        #print(mat)
         return 1
     for i in range(0, 10):
         for j in range(0, 10):
@@ -154,7 +154,7 @@ def run_game():
                     # aici e botul de fapt
                     runda_player_main(var_x[0], var_y[0])
                     if check_if_game_over() == 1:
-                        print("JOCUL E GATA!!! castiga BOTUL!!")
+                        #print("JOCUL E GATA!!! castiga BOTUL!!")
                         joc_e_gata[0] = 1
                     semnal=1
         if semnal==0:
@@ -182,15 +182,15 @@ def run_game():
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if joc_e_gata[0]==0:
                         mouse_x, mouse_y = event.pos
-                        print(mouse_x / cell_size)
-                        print(mouse_y / cell_size)  # pentru coordonate in matrice
+                        #print(mouse_x / cell_size)
+                        #print(mouse_y / cell_size)  # pentru coordonate in matrice
                         if(semafor_start_game==0):
                             #mouse_x, mouse_y = event.pos
                             # deci casuta stanga sus prima linie lrima coloana: 1,5-2,5| 7,5-8,5
                             # 1,5-2,5-3,5 pe x
                             #7,5-8,5 pe Y
-                            #print(mouse_x/cell_size)
-                            #print(mouse_y/cell_size) # pentru coordonate in matrice
+                            ##print(mouse_x/cell_size)
+                            ##print(mouse_y/cell_size) # pentru coordonate in matrice
                             for i, (boat_x, boat_y) in enumerate(boats):
                                 # nu inteleg de ce functioneaza dar functioneaza efectiv....
                                 # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -199,18 +199,18 @@ def run_game():
                                 if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                                     selected = i
                                     last_one_tho=selected
-                                    print("barca")
-                                    print(i)
+                                    #print("barca")
+                                    #print(i)
                                     offset_x = mouse_x - boat_x
                                     offset_y = mouse_y - boat_y
                             if rotate_button.collidepoint(event.pos):
-                                #print("seapasa")
+                                ##print("seapasa")
                                 rotate_boats(last_one_tho)
                             if start_button.collidepoint(event.pos):
-                                print("NU E GATA")
+                                #print("NU E GATA")
                                 if get_valid_pozitiei_barci()==1:
                                     merge[0]=1
-                                    print("E GATA")
+                                    #print("E GATA")
                                     semafor_start_game=1
                                     trebuie_timer[0] = 1  # adaugat de mn
                                 else: merge[0]=0
@@ -226,11 +226,11 @@ def run_game():
                             #if al_cui_e_randul[0]==1:
                             if jucam_cu_bot[0] == 1:
                                 if al_cui_e_randul[0]==0:
-                                    print(trebuie_timer[0])
+                                    ##print(trebuie_timer[0])
                                     runda_bot(mouse_x, mouse_y,trebuie_timer)
-                                    print(trebuie_timer[0])
+                                    ##print(trebuie_timer[0])
                                     if check_if_game_over() == 2:
-                                        print("JOCUL E GATA!!! castiga MARIUS!!!")
+                                        #print("JOCUL E GATA!!! castiga MARIUS!!!")
                                         joc_e_gata[0]=1
                                 # si intra direct mutarea botului
                             # matricea adversarului
@@ -244,7 +244,7 @@ def run_game():
                                     trebuie_timer[0] = 1  # adaugat de mn
                             #   if jucam_cu_bot[0]==1:
                                     #bot_alege_pozitie()
-                                    #print("ce plms")
+                                    ##print("ce plms")
                               #      runda_bot(mouse_x, mouse_y)
                                     #runda_adversar(mouse_x,mouse_y)
 
@@ -257,8 +257,8 @@ def run_game():
                                     selected = i
                                     last_one_tho=selected
                                     # cum convertesc din
-                                    print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
-                                    print(i)
+                                    #print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
+                                    #print(i)
                 elif event.type == pygame.MOUSEBUTTONUP:
                     last_one_tho=selected
                     selected = None
@@ -277,8 +277,8 @@ def run_game():
                             boat_y = min(max(round((mouse_y - offset_y - board_y) / cell_size) * cell_size + board_y, min_y),
                                          max_y)
                             boats[selected] = (boat_x, boat_y)
-                            print(boat_x)
-                            print(boat_y)
+                            #print(boat_x)
+                            #print(boat_y)
 
                     # ...
         screen.fill(Fundal)  # funddalula
