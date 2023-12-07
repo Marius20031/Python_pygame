@@ -88,9 +88,11 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                 # a gasit poz in matrice si e pozitia
                 if mat_adversar[int(q - 7.5)][int(x - 13)] == 2:
                     print("ai facut deja asta, fa altceva!")
+                    merge[1] = 0
                     #error_cannot_make_same_move()
                     trebuie_timer[0]=1
                 else:
+                    merge[1] = 1
                     nu=1
                     if mat_adversar[int(q - 7.5)][int(x - 13)] == 1:
                         tupla_ai_nimerit[nr_total_cercuri[0]] = 1

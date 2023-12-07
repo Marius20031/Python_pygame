@@ -313,8 +313,15 @@ def run_game():
             afisare_barci()
         if merge[0]==0:
             error_boats_not_in_correct_position()
+        if merge[1] == 0:
+            error_cannot_make_same_move()
+            #merge[1] = 1
+        if merge[2] == 0:
+            error_not_your_turn()
+            #merge[2] = 1
         afisare_contur_timer()
         afisare_timer_default()
+
         for uwu in range(0, nr_total_cercuri[0]):
             if tupla_ai_nimerit[uwu]:
                 global explozie
