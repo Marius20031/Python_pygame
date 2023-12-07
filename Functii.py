@@ -240,7 +240,7 @@ def run_game():
                                     trebuie_timer[0] = 1  # adaugat de mn
                                     # matricea adversarului
                                 else:
-                                    runda_adversar(mouse_x, mouse_y)
+                                    runda_bot(mouse_x, mouse_y,trebuie_timer)
                                     trebuie_timer[0] = 1  # adaugat de mn
                             #   if jucam_cu_bot[0]==1:
                                     #bot_alege_pozitie()
