@@ -3,7 +3,7 @@ from Functii import *
 import random
 # Inceputul
 pygame.init()
-
+pygame.display.set_caption('Ship Wars')
 #scris de mn
 white = (255, 255, 255)
 black=(0,0,0)
@@ -60,6 +60,10 @@ icon2=pygame.transform.smoothscale(icon1,(43,43))
 explozie=pygame.image.load("Photos/Explosion-RED-Graphic-style05_prev_lg.png")
 explozie=explozie.convert_alpha()
 explozie=pygame.transform.smoothscale(explozie,(70,70))
+
+x_mare=pygame.image.load("Photos/2048px-Red_x.svg.png")
+x_mare=x_mare.convert_alpha()
+x_mare=pygame.transform.smoothscale(x_mare,(45,40))
 
 background=pygame.image.load("Photos/peakpx.jpg")
 background=background.convert_alpha()
@@ -240,8 +244,16 @@ def afisare_timer_default():
     screen.blit(text_surface16, text_rect16)
 global nr_sec
 nr_sec=[30]
-def incepe_timer(idx,trebuie_timer,nr_sec):
+def incepe_timer(idx,trebuie_timer,nr_sec,wait_time,bot):
     sec=nr_sec[0]
+    afisare_contur_timer()
+    if (idx == 0):
+        text17 = "00"
+        text_surface17 = fontnormal.render(text17, True, white)
+        text_rect17 = text_surface17.get_rect()
+        text_rect17.center = (542, 27)
+        screen.blit(text_surface17, text_rect17)
+        pygame.display.update(text_rect17)
     while sec>=0:
         text17 = str(sec)
         if(sec<10):
@@ -257,7 +269,12 @@ def incepe_timer(idx,trebuie_timer,nr_sec):
         pygame.display.update(text_rect17)
         sec-=1
         pygame.time.delay(1000)
+        if bot==1:
+            if wait_time==-1:
+                sec=-2
+            wait_time-=1
         if(sec==-1):
+            trebuie_timer[0]=0
             screen.blit(text_surface18,text_rect18)
             screen.blit(text_surface19,text_rect19)
             pygame.display.update(text_rect18)
