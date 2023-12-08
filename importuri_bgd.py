@@ -1,6 +1,11 @@
 import pygame
+from Importuri import *
+from full_database import *
 from Functii import *
 import random
+
+
+
 # Inceputul
 pygame.init()
 pygame.display.set_caption('Ship Wars')
@@ -446,6 +451,7 @@ def enter_menu(mai_continua):
     password_text=""
     password_text_secret=""
     x=-1
+    global username_conectat
     while(stai_in_meniu):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -475,12 +481,13 @@ def enter_menu(mai_continua):
                 if ellipse_rect.collidepoint(event.pos):
                     print("apas")
                     if show_credentials==1:
-                        #apel functie try create account
-                        x=0 # mrg pui x=try_create()
-                        #verificam rez intors in x, x=0 ->succes, x=1
+                        x=create_try(username_text,password_text)  #aici am apleat functia, x ar trebui sa aiba valoarea de return buna
+                        if x==0:
+                            username_conectat[0]=username_text
                     else:
-                        #apel functie try sign in
-                        x = 0  # mrg pui x=try_create()
+                        x=login_try(username_text,password_text)
+                        if x==0:
+                            username_conectat[0]=username_text
 
                 if text_rect_22.collidepoint(event.pos):
                     show_credentials=3

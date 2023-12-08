@@ -4,11 +4,11 @@ import pygame
 from Importuri import *
 from runde import *
 import numpy as np
+
 from bot import *
 from importuri_bgd import *
 circle_color_rosu = (255, 0, 0)
 circle_color_verde = (0, 128, 0)
-global black
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -47,15 +47,15 @@ def rotate_boats(selected):
         boats[selected] = (boat_x, boat_y) #!!!!!!!!!!!!!!
 def draw_board():
     for i in range(11):
-        pygame.draw.line(screen, white, (board_x + i * cell_size, board_y),
+        pygame.draw.line(screen, WHITE, (board_x + i * cell_size, board_y),
                          (board_x + i * cell_size, board_y + board_height), 2)
-        pygame.draw.line(screen, white, (board_x, board_y + i * cell_size),
+        pygame.draw.line(screen, WHITE, (board_x, board_y + i * cell_size),
                          (board_x + board_width, board_y + i * cell_size), 2)
 
     for i in range(11):
-        pygame.draw.line(screen, white, (board2_x + i * cell2_size, board2_y),
+        pygame.draw.line(screen, WHITE, (board2_x + i * cell2_size, board2_y),
                          (board2_x + i * cell2_size, board2_y + board2_height), 2)
-        pygame.draw.line(screen, white, (board2_x, board2_y + i * cell2_size),
+        pygame.draw.line(screen, WHITE, (board2_x, board2_y + i * cell2_size),
                          (board2_x + board2_width, board2_y + i * cell2_size), 2)
 
 # dimensiunea barcilor
@@ -94,10 +94,10 @@ def get_valid_pozitiei_barci():
                     var=var+1
                     mat[j-8][i-2]=1
                     break
-    print("barcile sunt vazute ca:")
-    print(var)
+    #print("barcile sunt vazute ca:")
+    #print(var)
     if var == 14:
-        print(mat)
+        #print(mat)
         return 1
     for i in range(0, 10):
         for j in range(0, 10):
@@ -108,18 +108,17 @@ def get_valid_pozitiei_barci():
 global trebuie_timer#adaugat de mn
 trebuie_timer=[0]
 meniu=0
-global running
 # Main function to run the game
 def run_game():
     global selected
     global offset_x
     global offset_y
     running = True
-    mai_continua=[1]
-    if meniu==0:
+    mai_continua = [1]
+    if meniu == 0:
         enter_menu(mai_continua)
-    if mai_continua[0]==0:
-        running=False
+    if mai_continua[0] == 0:
+        running = False
     else:
         timer()
     afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
@@ -139,7 +138,6 @@ def run_game():
 
     last_one_tho=None
     move_board2()
-
     semafor_start_game = 0 # nu s.a apasat start
     #if jucam_cu_bot[0]==1:
     creare_matrice_barci_poz()
@@ -151,6 +149,7 @@ def run_game():
     # Post the custom event to the queue
     while running:
         global nr_sec
+        print(username_conectat[0])
         button_font = pygame.font.Font(None, 36)
         if joc_e_gata[0]==0:
             if jucam_cu_bot[0]==1:
@@ -163,7 +162,7 @@ def run_game():
                     # aici e botul de fapt
                     runda_player_main(var_x[0], var_y[0])
                     if check_if_game_over() == 1:
-                        print("JOCUL E GATA!!! castiga BOTUL!!")
+                        #print("JOCUL E GATA!!! castiga BOTUL!!")
                         joc_e_gata[0] = 1
                     semnal=1
         if semnal==0:
@@ -191,15 +190,15 @@ def run_game():
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if joc_e_gata[0]==0:
                         mouse_x, mouse_y = event.pos
-                        print(mouse_x / cell_size)
-                        print(mouse_y / cell_size)  # pentru coordonate in matrice
+                        #print(mouse_x / cell_size)
+                        #print(mouse_y / cell_size)  # pentru coordonate in matrice
                         if(semafor_start_game==0):
                             #mouse_x, mouse_y = event.pos
                             # deci casuta stanga sus prima linie lrima coloana: 1,5-2,5| 7,5-8,5
                             # 1,5-2,5-3,5 pe x
                             #7,5-8,5 pe Y
-                            #print(mouse_x/cell_size)
-                            #print(mouse_y/cell_size) # pentru coordonate in matrice
+                            ##print(mouse_x/cell_size)
+                            ##print(mouse_y/cell_size) # pentru coordonate in matrice
                             for i, (boat_x, boat_y) in enumerate(boats):
                                 # nu inteleg de ce functioneaza dar functioneaza efectiv....
                                 # da aici trb sa verific daca intre alea se afla barca aici trb modificat:
@@ -208,18 +207,18 @@ def run_game():
                                 if boat_x <= mouse_x <= boat_x+boat_width_VECT[i]*cell_size and boat_y <= mouse_y <= boat_y+boat_height_VECT[i]*cell_size: # ca sa ia toata barca DE RECITI ACII CONDITIILE PT CLICKURI
                                     selected = i
                                     last_one_tho=selected
-                                    print("barca")
-                                    print(i)
+                                    #print("barca")
+                                    #print(i)
                                     offset_x = mouse_x - boat_x
                                     offset_y = mouse_y - boat_y
                             if rotate_button.collidepoint(event.pos):
-                                #print("seapasa")
+                                ##print("seapasa")
                                 rotate_boats(last_one_tho)
                             if start_button.collidepoint(event.pos):
-                                print("NU E GATA")
+                                #print("NU E GATA")
                                 if get_valid_pozitiei_barci()==1:
                                     merge[0]=1
-                                    print("E GATA")
+                                    #print("E GATA")
                                     semafor_start_game=1
                                     trebuie_timer[0] = 1  # adaugat de mn
                                 else: merge[0]=0
@@ -235,11 +234,11 @@ def run_game():
                             #if al_cui_e_randul[0]==1:
                             if jucam_cu_bot[0] == 1:
                                 if al_cui_e_randul[0]==0:
-                                    print(trebuie_timer[0])
+                                    ##print(trebuie_timer[0])
                                     runda_bot(mouse_x, mouse_y,trebuie_timer)
-                                    print(trebuie_timer[0])
+                                    ##print(trebuie_timer[0])
                                     if check_if_game_over() == 2:
-                                        print("JOCUL E GATA!!! castiga MARIUS!!!")
+                                        #print("JOCUL E GATA!!! castiga MARIUS!!!")
                                         joc_e_gata[0]=1
                                 # si intra direct mutarea botului
                             # matricea adversarului
@@ -253,7 +252,7 @@ def run_game():
                                     trebuie_timer[0] = 1  # adaugat de mn
                             #   if jucam_cu_bot[0]==1:
                                     #bot_alege_pozitie()
-                                    #print("ce plms")
+                                    ##print("ce plms")
                               #      runda_bot(mouse_x, mouse_y)
                                     #runda_adversar(mouse_x,mouse_y)
 
@@ -266,8 +265,8 @@ def run_game():
                                     selected = i
                                     last_one_tho=selected
                                     # cum convertesc din
-                                    print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
-                                    print(i)
+                                    #print("BARCA A FOST LOVITA SI ESTE BARCA NR: ")
+                                    #print(i)
                 elif event.type == pygame.MOUSEBUTTONUP:
                     last_one_tho=selected
                     selected = None
@@ -286,12 +285,11 @@ def run_game():
                             boat_y = min(max(round((mouse_y - offset_y - board_y) / cell_size) * cell_size + board_y, min_y),
                                          max_y)
                             boats[selected] = (boat_x, boat_y)
-                            print(boat_x)
-                            print(boat_y)
+                            #print(boat_x)
+                            #print(boat_y)
 
                     # ...
         screen.fill(Fundal)  # funddalula
-        screen.blit(fundal,(0,0))
         show_background() #bogdan
         draw_board()  # desenam
         pygame.draw.rect(screen, (255, 0, 0), rotate_button)
