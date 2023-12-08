@@ -1,5 +1,7 @@
 from random import random
-
+import pygame
+from Importuri import *
+from Functii import *
 import pymongo
 from Importuri import *
 from pymongo import *
@@ -12,6 +14,7 @@ from Importuri import *
 from runde import *
 import numpy as np
 from importuri_bgd import *
+import random
 
 uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
 
@@ -22,8 +25,8 @@ db = client["Datapygame"]
 collection = db["Collection"]
 # astea le vreau mereu ^
 def random_guest_name():
-    var=random.randint(324123,2134432)
-    var+=123412
+    var=random.randint(123,912)
+    var+=87
     return("Guest"+str(var))
 
 def verificare_exisa(username,parola):

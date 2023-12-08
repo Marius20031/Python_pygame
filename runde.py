@@ -1,6 +1,5 @@
 import pygame
 from Importuri import *
-from full_database import *
 import numpy as np
 from importuri_bgd import *
 from Functii import *
@@ -36,7 +35,7 @@ def runda_player_main(mouse_x,mouse_y):
                     nr_total_cercuri[0] += 1  # ca sa iau range
                     al_cui_e_randul[0]=nu # mai da o data
                     #print("eok")
-                    nr_sec[0]=30
+                    #nr_sec[0]=30
             x = x * 10
             q = q * 10
     #print("adversar")
@@ -111,7 +110,7 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                     tupla_cu_cercuri[nr_total_cercuri[0]][1]=(2 * q + 1) / 2 * cell_size
                     nr_total_cercuri[0] += 1 # ca sa iau range
                     al_cui_e_randul[0]= nu
-                    nr_sec[0]=30
+                    #nr_sec[0]=30
             x = x * 10
             q = q * 10
     #print("player")
