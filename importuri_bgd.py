@@ -448,6 +448,16 @@ def enter_menu(mai_continua):
                     else:
                         show_password=0
                     print(show_password)
+                if ellipse_rect.collidepoint(event.pos):
+                    print("apas")
+                    if show_credentials==1:
+                        #apel functie try create account
+                        x=3 # mrg pui x=try_create()
+                        #verificam rez intors in x, x=0 ->succes, x=1
+                    else:
+                        #apel functie try sign in
+                        x = 3  # mrg pui x=try_create()
+
                 if text_rect_22.collidepoint(event.pos):
                     show_credentials=3
                 if text_rect_33.collidepoint(event.pos):
@@ -491,7 +501,7 @@ def enter_menu(mai_continua):
             screen.blit(text_surface_26,text_rect_26)
         elif show_credentials==3:
             screen.blit(goback, (20, 930))
-            screen.blit(text_surface_33, text_rect_33) 
+            screen.blit(text_surface_33, text_rect_33)
         elif show_credentials==1:
             screen.blit(text_surface_27,text_rect_27)
             screen.blit(text_surface_28,text_rect_28)
