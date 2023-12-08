@@ -8,6 +8,8 @@ pygame.display.set_caption('Ship Wars')
 white = (255, 255, 255)
 black=(0,0,0)
 red=(255,0,0)
+gri=(53,60,64)
+albastru=(0,66,66)
 x=1
 
 fontnormal=pygame.font.Font(None,40)
@@ -370,6 +372,16 @@ text_surface_33 = font.render(text_33, True, white)
 text_rect_33 = text_surface_33.get_rect()
 text_rect_33.center = (150,965)
 
+text_34 = "Create"
+text_surface_34 = font.render(text_34, True, white)
+text_rect_34 = text_surface_34.get_rect()
+text_rect_34.center = (490,700)
+
+text_35 = "Login"
+text_surface_35 = font.render(text_35, True, white)
+text_rect_35 = text_surface_35.get_rect()
+text_rect_35.center = (490,700)
+
 leaderboard = pygame.image.load("Photos/leaderboard_4489663.png")
 leaderboard = leaderboard.convert_alpha()
 leaderboard = pygame.transform.smoothscale(leaderboard, (100,100))
@@ -402,6 +414,8 @@ hide_rect.topleft=(770,565)
 
 username_input = pygame.Rect(320, 370, 450, 60)  # Username input box rectangle (x, y, width, height)
 password_input = pygame.Rect(320, 570, 450, 60)  # Password input box rectangle (x, y, width, height)
+ellipse_rect = pygame.Rect(390,650,200,100)
+
 def enter_menu(mai_continua):
     stai_in_meniu=True
     show_credentials=0
@@ -434,6 +448,8 @@ def enter_menu(mai_continua):
                     else:
                         show_password=0
                     print(show_password)
+                if text_rect_22.collidepoint(event.pos):
+                    show_credentials=3
                 if text_rect_33.collidepoint(event.pos):
                     show_credentials=0
                     password_text=""
@@ -457,7 +473,7 @@ def enter_menu(mai_continua):
                         #inseamna ca s a terminat citirea userului desi idk
                         print("mere")
                     else:
-                        if len(password_text)<17:
+                        if len(password_text)<15:
                             password_text+=event.unicode
                             password_text_secret+="*"
 
@@ -473,6 +489,9 @@ def enter_menu(mai_continua):
             screen.blit(text_surface_24,text_rect_24)
             screen.blit(text_surface_25,text_rect_25)
             screen.blit(text_surface_26,text_rect_26)
+        elif show_credentials==3:
+            screen.blit(goback, (20, 930))
+            screen.blit(text_surface_33, text_rect_33) 
         elif show_credentials==1:
             screen.blit(text_surface_27,text_rect_27)
             screen.blit(text_surface_28,text_rect_28)
@@ -480,11 +499,14 @@ def enter_menu(mai_continua):
             screen.blit(lacat,(30,550))
             screen.blit(text_surface_29,text_rect_29)
             screen.blit(text_surface_30,text_rect_30)
-            pygame.draw.rect(screen, black, username_input, 2)
-            pygame.draw.rect(screen, black, password_input, 2)
+            pygame.draw.rect(screen, black, username_input, 4)
+            pygame.draw.rect(screen, black, password_input, 4)
             screen.blit(goback, (20, 930))
             screen.blit(text_surface_33, text_rect_33)
             screen.blit(hide,hide_rect)
+            pygame.draw.ellipse(screen,albastru,ellipse_rect,)
+            pygame.draw.ellipse(screen, white, (390, 650, 200, 100),5)
+            screen.blit(text_surface_34,text_rect_34)
             username_surface = font.render(username_text, True, black)
             if show_password==0:
                 password_surface = pygame.font.Font("JumboSale Trial.otf",55).render(password_text_secret, True, black)
@@ -502,11 +524,14 @@ def enter_menu(mai_continua):
             screen.blit(lacat, (30, 550))
             screen.blit(text_surface_29, text_rect_29)
             screen.blit(text_surface_30, text_rect_30)
-            pygame.draw.rect(screen, black, username_input, 2)
-            pygame.draw.rect(screen, black, password_input, 2)
+            pygame.draw.rect(screen, black, username_input, 4)
+            pygame.draw.rect(screen, black, password_input, 4)
             screen.blit(goback,(20,930))
             screen.blit(hide,hide_rect)
             screen.blit(text_surface_33,text_rect_33)
+            pygame.draw.ellipse(screen, albastru, (390, 650, 200, 100))
+            pygame.draw.ellipse(screen, white, (390, 650, 200, 100),5)
+            screen.blit(text_surface_35, text_rect_35)
             username_surface = font.render(username_text, True, black)
             if show_password==0:
                 password_surface = pygame.font.Font("JumboSale Trial.otf",55).render(password_text_secret, True, black)
