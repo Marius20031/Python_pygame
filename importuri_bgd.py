@@ -19,18 +19,18 @@ green=(0,255,0)
 x=1
 
 fontnormal=pygame.font.Font(None,40)
+fontnormal2=pygame.font.Font(None,70)
 font=pygame.font.Font("JumboSale Trial.otf",40)
 font_urias=pygame.font.Font("JumboSale Trial.otf",100)
 font_mediu=pygame.font.Font("JumboSale Trial.otf",27)
 font_mic=pygame.font.Font("JumboSale Trial.otf",25)
-text = "Player"
-text_surface = font.render(text, True, white)
-text_rect = text_surface.get_rect()
-text_rect.center = (370, 30)
+
+global nume_player
+nume_player=""
 
 
 text2="Bot"
-text_surface2=font.render(text2,True,white)
+text_surface2=fontnormal2.render(text2,True,gri)
 text_rect2=text_surface2.get_rect()
 text_rect2.center=(630,30)
 
@@ -90,11 +90,11 @@ background2=pygame.transform.smoothscale(background2,(400, 400))
 
 text_surface8 = font_mediu.render('>', True, black)
 text_rect8 = text_surface8.get_rect()
-text_rect8.center=(286,61)
+text_rect8.center=(180,61)
 
 text_surface9 = font_mediu.render('<', True, black)
 text_rect9 = text_surface9.get_rect()
-text_rect9.center=(266,61)
+text_rect9.center=(160,61)
 
 
 text10="The boats are not in a valid position"
@@ -160,10 +160,14 @@ def show_background():
     screen.blit(background,(60,300))
     screen.blit(background2,(525,300))
 def afisare_playeri():
+    text = nume_player
+    text_surface = fontnormal2.render(text, True, gri)
+    text_rect = text_surface.get_rect()
+    text_rect.center = (315, 30)
     screen.blit(text_surface, text_rect)
     screen.blit(text_surface2, text_rect2)
-    screen.blit(icon1,(255,4))
-    screen.blit(icon2,(667,4))
+    screen.blit(icon1,(150,4))
+    screen.blit(icon2,(680,4))
 def afisare_icon_bot():
     nr = random.randint(1, 5)
     global icon2
@@ -408,6 +412,16 @@ text_surface_39 = font_meniu.render(text_39, True, green)
 text_rect_39 = text_surface_39.get_rect()
 text_rect_39.center = (500,800)
 
+text_40 = "Start Game"
+text_surface_40 = font.render(text_40, True, white)
+text_rect_40 = text_surface_40.get_rect()
+text_rect_40.center = (800,965)
+
+text_41 = "Login"
+text_surface_41 = font.render(text_41, True, white)
+text_rect_41 = text_surface_41.get_rect()
+text_rect_41.center = (870,965)
+
 leaderboard = pygame.image.load("Photos/leaderboard_4489663.png")
 leaderboard = leaderboard.convert_alpha()
 leaderboard = pygame.transform.smoothscale(leaderboard, (100,100))
@@ -432,6 +446,10 @@ goback = pygame.image.load("Photos/go-back-arrow-svgrepo-com (1).png")
 goback = goback.convert_alpha()
 goback= pygame.transform.smoothscale(goback, (50,50))
 
+gof = pygame.image.load("Photos/go-back-arrow-svgrepo-com (3).png")
+gof = gof.convert_alpha()
+gof= pygame.transform.smoothscale(gof, (50,50))
+
 hide = pygame.image.load("Photos/action-hide-password-512.png")
 hide = hide.convert_alpha()
 hide= pygame.transform.smoothscale(hide, (70,70))
@@ -451,7 +469,9 @@ def enter_menu(mai_continua):
     password_text=""
     password_text_secret=""
     x=-1
+    global e_guest
     global username_conectat
+    global nume_player
     while(stai_in_meniu):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -460,8 +480,21 @@ def enter_menu(mai_continua):
             if event.type==pygame.MOUSEBUTTONDOWN:
                 if text_rect_25.collidepoint(event.pos):
                     #setat variabila
-                    print("plm")
+                    e_guest[0]=1
+                    nume_player=random_guest_name()
                     stai_in_meniu=False
+                if x==0:
+                    if show_credentials==2:
+                        if text_rect_40.collidepoint(event.pos):
+                            nume_player=username_conectat[0]
+                            stai_in_meniu=False
+                    else:
+                        if text_rect_41.collidepoint(event.pos):
+                            show_credentials=2
+                            x=-1
+                            password_text = ""
+                            password_text_secret = ""
+                            username_text = ""
                 if text_rect_26.collidepoint(event.pos):
                     show_credentials=1
                     x=-1
@@ -484,10 +517,12 @@ def enter_menu(mai_continua):
                         x=create_try(username_text,password_text)  #aici am apleat functia, x ar trebui sa aiba valoarea de return buna
                         if x==0:
                             username_conectat[0]=username_text
+                        #x=0 #asta trb sters, e doar pt ca n am baza de date
                     else:
-                        x=login_try(username_text,password_text)
+                        x=login_try(username_text,password_text)   ####trb decomentat
                         if x==0:
                             username_conectat[0]=username_text
+                        #x=0# trb sters,pus ca n am baza de date
 
                 if text_rect_22.collidepoint(event.pos):
                     show_credentials=3
@@ -501,9 +536,6 @@ def enter_menu(mai_continua):
                 if in_ce_scrii==1:
                     if event.key== pygame.K_BACKSPACE:
                         username_text=username_text[:-1]
-                    elif event.key == pygame.K_RETURN:
-                        #inseamna ca s a terminat citirea userului desi idk
-                        print("mere")
                     else:
                         if len(username_text)<20:
                             username_text+=event.unicode
@@ -511,9 +543,6 @@ def enter_menu(mai_continua):
                     if event.key== pygame.K_BACKSPACE:
                         password_text=password_text[:-1]
                         password_text_secret=password_text_secret[:-1]
-                    elif event.key == pygame.K_RETURN:
-                        #inseamna ca s a terminat citirea userului desi idk
-                        print("mere")
                     else:
                         if len(password_text)<15:
                             password_text+=event.unicode
@@ -553,6 +582,8 @@ def enter_menu(mai_continua):
                 screen.blit(text_surface_36,text_rect_36)
             elif x==0:
                 screen.blit(text_surface_38,text_rect_38)
+                screen.blit(gof,(930,930))
+                screen.blit(text_surface_41,text_rect_41)
             username_surface = font.render(username_text, True, black)
             if show_password==0:
                 password_surface = pygame.font.Font("JumboSale Trial.otf",55).render(password_text_secret, True, black)
@@ -582,6 +613,8 @@ def enter_menu(mai_continua):
                 screen.blit(text_surface_37,text_rect_37)
             elif x==0:
                 screen.blit(text_surface_39,text_rect_39)
+                screen.blit(gof, (930, 930))
+                screen.blit(text_surface_40, text_rect_40)
             username_surface = font.render(username_text, True, black)
             if show_password==0:
                 password_surface = pygame.font.Font("JumboSale Trial.otf",55).render(password_text_secret, True, black)

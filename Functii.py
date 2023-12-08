@@ -61,8 +61,8 @@ def draw_board():
 # dimensiunea barcilor
 
 def show_timer(seconds):
-    font = pygame.font.Font(None, 75) # FONTUL TIMMERULUI
-    screen.fill((255, 255, 255))
+    font = pygame.font.Font(None, 120) # FONTUL TIMMERULUI
+    screen.fill(albastru)
     text = font.render(str(seconds), True, (0, 0, 0))
     text_rect = text.get_rect(center=(450, 450))
     screen.blit(text, text_rect)
@@ -246,10 +246,18 @@ def run_game():
                                 if al_cui_e_randul[0] == 1:
                                     runda_player_main(mouse_x, mouse_y)
                                     trebuie_timer[0] = 1  # adaugat de mn
+                                    if al_cui_e_randul[0]!=1:
+                                        nr_sec[0]=30
+                                    else:
+                                        semnal=1
                                     # matricea adversarului
                                 else:
                                     runda_bot(mouse_x, mouse_y,trebuie_timer)
                                     trebuie_timer[0] = 1  # adaugat de mn
+                                    if al_cui_e_randul[0]!=0:
+                                        nr_sec[0]=30
+                                    else:
+                                        semnal=1
                             #   if jucam_cu_bot[0]==1:
                                     #bot_alege_pozitie()
                                     ##print("ce plms")
@@ -290,6 +298,7 @@ def run_game():
 
                     # ...
         screen.fill(Fundal)  # funddalula
+        screen.blit(fundal,(0,0))
         show_background() #bogdan
         draw_board()  # desenam
         pygame.draw.rect(screen, (255, 0, 0), rotate_button)

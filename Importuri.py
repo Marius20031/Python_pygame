@@ -50,12 +50,6 @@ boats = [
     (4 * cell_size, 21 * cell_size),
     (4 * cell_size, 22 * cell_size)
 ]
-#boats = [
-#    (2 * cell_size, 1 * cell_size),
-#    (3 * cell_size, 2 * cell_size),
-#    (4 * cell_size, 3 * cell_size),
-#    (5 * cell_size, 4 * cell_size)
-#]
 
 # boats_size e aia importanta
 boats_size = [
@@ -79,7 +73,7 @@ tupla_cu_cercuri = np.zeros((551, 2))
 tupla_ai_nimerit=np.zeros(551)
 # afisare eroare
 merge=[1,1,1]
-jucam_cu_bot=[1]
+jucam_cu_bot=[0]
 tin_randomizarea=[-1,-1,-1,-1]
 alege_first_time=[1]
 var_x=[0]
