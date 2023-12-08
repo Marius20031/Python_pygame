@@ -8,6 +8,7 @@ from bot import *
 from importuri_bgd import *
 circle_color_rosu = (255, 0, 0)
 circle_color_verde = (0, 128, 0)
+global black
 def rotate_boats(selected):
     #global boats
     global boat_width_1
@@ -46,15 +47,15 @@ def rotate_boats(selected):
         boats[selected] = (boat_x, boat_y) #!!!!!!!!!!!!!!
 def draw_board():
     for i in range(11):
-        pygame.draw.line(screen, WHITE, (board_x + i * cell_size, board_y),
+        pygame.draw.line(screen, white, (board_x + i * cell_size, board_y),
                          (board_x + i * cell_size, board_y + board_height), 2)
-        pygame.draw.line(screen, WHITE, (board_x, board_y + i * cell_size),
+        pygame.draw.line(screen, white, (board_x, board_y + i * cell_size),
                          (board_x + board_width, board_y + i * cell_size), 2)
 
     for i in range(11):
-        pygame.draw.line(screen, WHITE, (board2_x + i * cell2_size, board2_y),
+        pygame.draw.line(screen, white, (board2_x + i * cell2_size, board2_y),
                          (board2_x + i * cell2_size, board2_y + board2_height), 2)
-        pygame.draw.line(screen, WHITE, (board2_x, board2_y + i * cell2_size),
+        pygame.draw.line(screen, white, (board2_x, board2_y + i * cell2_size),
                          (board2_x + board2_width, board2_y + i * cell2_size), 2)
 
 # dimensiunea barcilor
@@ -106,13 +107,21 @@ def get_valid_pozitiei_barci():
 
 global trebuie_timer#adaugat de mn
 trebuie_timer=[0]
-
+meniu=0
+global running
 # Main function to run the game
 def run_game():
     global selected
     global offset_x
     global offset_y
-    timer()
+    running = True
+    mai_continua=[1]
+    if meniu==0:
+        enter_menu(mai_continua)
+    if mai_continua[0]==0:
+        running=False
+    else:
+        timer()
     afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
     button_font = pygame.font.Font(None, 36)
     rotate_button = pygame.Rect(50, 50, 100, 50)
@@ -130,7 +139,7 @@ def run_game():
 
     last_one_tho=None
     move_board2()
-    running = True
+
     semafor_start_game = 0 # nu s.a apasat start
     #if jucam_cu_bot[0]==1:
     creare_matrice_barci_poz()
@@ -240,7 +249,7 @@ def run_game():
                                     trebuie_timer[0] = 1  # adaugat de mn
                                     # matricea adversarului
                                 else:
-                                    runda_adversar(mouse_x, mouse_y)
+                                    runda_bot(mouse_x, mouse_y,trebuie_timer)
                                     trebuie_timer[0] = 1  # adaugat de mn
                             #   if jucam_cu_bot[0]==1:
                                     #bot_alege_pozitie()
@@ -282,6 +291,7 @@ def run_game():
 
                     # ...
         screen.fill(Fundal)  # funddalula
+        screen.blit(fundal,(0,0))
         show_background() #bogdan
         draw_board()  # desenam
         pygame.draw.rect(screen, (255, 0, 0), rotate_button)
@@ -313,8 +323,15 @@ def run_game():
             afisare_barci()
         if merge[0]==0:
             error_boats_not_in_correct_position()
+        if merge[1] == 0:
+            error_cannot_make_same_move()
+            #merge[1] = 1
+        if merge[2] == 0:
+            error_not_your_turn()
+            #merge[2] = 1
         afisare_contur_timer()
         afisare_timer_default()
+
         for uwu in range(0, nr_total_cercuri[0]):
             if tupla_ai_nimerit[uwu]:
                 global explozie

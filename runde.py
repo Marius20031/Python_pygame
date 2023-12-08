@@ -33,7 +33,7 @@ def runda_player_main(mouse_x,mouse_y):
                     tupla_cu_cercuri[nr_total_cercuri[0]][0] = (2 * x + 1) / 2 * cell_size
                     tupla_cu_cercuri[nr_total_cercuri[0]][1] = (2 * q + 1) / 2 * cell_size
                     nr_total_cercuri[0] += 1  # ca sa iau range
-                    al_cui_e_randul[0]=0 # mai da o data
+                    al_cui_e_randul[0]=nu # mai da o data
                     print("eok")
                     nr_sec[0]=30
             x = x * 10
@@ -88,13 +88,15 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                 # a gasit poz in matrice si e pozitia
                 if mat_adversar[int(q - 7.5)][int(x - 13)] == 2:
                     print("ai facut deja asta, fa altceva!")
+                    merge[1] = 0
                     #error_cannot_make_same_move()
                     trebuie_timer[0]=1
                 else:
+                    merge[1] = 1
                     nu=1
                     if mat_adversar[int(q - 7.5)][int(x - 13)] == 1:
                         tupla_ai_nimerit[nr_total_cercuri[0]] = 1
-                        nu=1#modificat era 0
+                        nu=0#modificat era 0
                     mat_adversar[int(q - 7.5)][int(x - 13)] = 2
                     # a m intervalul dat de variabilele x si x+1 deci
                     tupla_cu_cercuri[nr_total_cercuri[0]][0]=(2 * x + 1) / 2 * cell_size
