@@ -16,6 +16,9 @@ red=(255,0,0)
 gri=(53,60,64)
 albastru=(0,66,66)
 green=(0,255,0)
+gold=(255,223,0)
+bronze=(205,127,50)
+silver=(165,169,180)
 x=1
 
 fontnormal=pygame.font.Font(None,40)
@@ -24,6 +27,7 @@ font=pygame.font.Font("JumboSale Trial.otf",40)
 font_urias=pygame.font.Font("JumboSale Trial.otf",100)
 font_mediu=pygame.font.Font("JumboSale Trial.otf",27)
 font_mic=pygame.font.Font("JumboSale Trial.otf",25)
+font_meniu=pygame.font.Font("JumboSale Trial.otf",60)
 
 global nume_player
 nume_player=""
@@ -317,8 +321,6 @@ text_surface_menu = font_urias.render(text_menu, True, white)
 text_rect_menu = text_surface_menu.get_rect()
 text_rect_menu.center = (500, 70)
 
-font_meniu=pygame.font.Font("JumboSale Trial.otf",60)
-
 
 text_22 = "->    Leaderboard"
 text_surface_22 = font_meniu.render(text_22, True, white)
@@ -380,7 +382,7 @@ text_rect_32.center = (500, 200)
 text_33 = "Go back"
 text_surface_33 = font.render(text_33, True, white)
 text_rect_33 = text_surface_33.get_rect()
-text_rect_33.center = (150,965)
+text_rect_33.center = (155,965)
 
 text_34 = "Create"
 text_surface_34 = font.render(text_34, True, white)
@@ -422,6 +424,11 @@ text_surface_41 = font.render(text_41, True, white)
 text_rect_41 = text_surface_41.get_rect()
 text_rect_41.center = (870,965)
 
+text_42 = "Leaderboard"
+text_surface_42 = font_urias.render(text_42, True, white)
+text_rect_42 = text_surface_42.get_rect()
+text_rect_42.center = (500,60)
+
 leaderboard = pygame.image.load("Photos/leaderboard_4489663.png")
 leaderboard = leaderboard.convert_alpha()
 leaderboard = pygame.transform.smoothscale(leaderboard, (100,100))
@@ -456,11 +463,85 @@ hide= pygame.transform.smoothscale(hide, (70,70))
 hide_rect=hide.get_rect()
 hide_rect.topleft=(770,565)
 
+text_43 = "Username"
+text_surface_43 = font_meniu.render(text_43, True, white)
+text_rect_43 = text_surface_43.get_rect()
+text_rect_43.center = (370,200)
+
+text_44 = "Level"
+text_surface_44 = font_meniu.render(text_44, True, white)
+text_rect_44 = text_surface_44.get_rect()
+text_rect_44.center = (675,200)
+
+text_45 = "XP"
+text_surface_45 = font_meniu.render(text_45, True, white)
+text_rect_45 = text_surface_45.get_rect()
+text_rect_45.center = (860,200)
+
+text_46 = "Pos."
+text_surface_46 = font_meniu.render(text_46, True, white)
+text_rect_46 = text_surface_46.get_rect()
+text_rect_46.center = (117,200)
+
+text_47 = "1"
+text_surface_47 = fontnormal2.render(text_47, True, gold)
+text_rect_47 = text_surface_47.get_rect()
+text_rect_47.center = (117,280)
+
+text_48 = "2"
+text_surface_48 = fontnormal2.render(text_48, True, silver)
+text_rect_48 = text_surface_48.get_rect()
+text_rect_48.center = (117,380)
+
+text_49 = "3"
+text_surface_49 = fontnormal2.render(text_49, True, bronze)
+text_rect_49 = text_surface_49.get_rect()
+text_rect_49.center = (117,480)
+
+text_50 = "4"
+text_surface_50 = fontnormal2.render(text_50, True, white)
+text_rect_50 = text_surface_50.get_rect()
+text_rect_50.center = (117,580)
+
+text_51 = "5"
+text_surface_51 = fontnormal2.render(text_51, True, white)
+text_rect_51 = text_surface_51.get_rect()
+text_rect_51.center = (117,680)
+
+text_52 = ".."
+text_surface_52 = font_meniu.render(text_52, True, white)
+text_rect_52 = text_surface_52.get_rect()
+text_rect_52.center = (117,780)
+
+text_53 = ".........."
+text_surface_53 = font_meniu.render(text_53, True, white)
+text_rect_53 = text_surface_53.get_rect()
+text_rect_53.center = (370,780)
+
+text_54 = "...."
+text_surface_54 = font_meniu.render(text_54, True, white)
+text_rect_54 = text_surface_54.get_rect()
+text_rect_54.center = (675,780)
+
+text_55 = "Game starts in:"
+text_surface_55 = font_urias.render(text_55, True, black)
+text_rect_55 = text_surface_55.get_rect()
+text_rect_55.center = (500,100)
+def show_text_timer():
+    screen.blit(text_surface_55,text_rect_55)
+
 username_input = pygame.Rect(320, 370, 450, 60)  # Username input box rectangle (x, y, width, height)
 password_input = pygame.Rect(320, 570, 450, 60)  # Password input box rectangle (x, y, width, height)
 ellipse_rect = pygame.Rect(425,650,200,100)
 
 def enter_menu(mai_continua):
+    date_leaderboard = [
+        ["Andrei", "3", "650"],
+        ["Rares", "2", "550"],
+        ["Ana", "1", "500"],
+        ["Andreea", "0", "300"],
+        ["Gabi", "0", "200"]
+    ]
     stai_in_meniu=True
     show_credentials=0
     show_password=0
@@ -526,6 +607,9 @@ def enter_menu(mai_continua):
 
                 if text_rect_22.collidepoint(event.pos):
                     show_credentials=3
+
+                    ## !!! aici trb apelata functia care modifica matricea de leaderboard sau o returneaza idk, nu conteaza !!!  ##
+                    # cv gen get_leaderboad(date_leaderboard)
                 if text_rect_33.collidepoint(event.pos):
                     x=-1
                     show_credentials=0
@@ -560,9 +644,129 @@ def enter_menu(mai_continua):
             screen.blit(text_surface_24,text_rect_24)
             screen.blit(text_surface_25,text_rect_25)
             screen.blit(text_surface_26,text_rect_26)
-        elif show_credentials==3:
+        elif show_credentials==3:                       #leaderboard
             screen.blit(goback, (20, 930))
             screen.blit(text_surface_33, text_rect_33)
+            screen.blit(text_surface_42,text_rect_42)
+            pygame.draw.line(screen, WHITE, (50,150),(50,830), 5)
+            pygame.draw.line(screen, WHITE, (180,150),(180,830), 5)
+            pygame.draw.line(screen, WHITE, (580,150),(580,830), 5)
+            pygame.draw.line(screen, WHITE, (770,150),(770,830), 5)
+            pygame.draw.line(screen, WHITE, (950,150),(950,830), 5)
+            pygame.draw.line(screen, WHITE, (48,150),(952,150), 5)
+            pygame.draw.line(screen, WHITE, (48,230),(952,230), 5)
+            pygame.draw.line(screen, WHITE, (48,330),(952,330), 5)
+            pygame.draw.line(screen, WHITE, (48,430),(952,430), 5)
+            pygame.draw.line(screen, WHITE, (48,530),(952,530), 5)
+            pygame.draw.line(screen, WHITE, (48,630),(952,630), 5)
+            pygame.draw.line(screen, WHITE, (48,730),(952,730), 5)
+            pygame.draw.line(screen, WHITE, (48,830),(952,830), 5)
+            screen.blit(text_surface_43,text_rect_43)
+            screen.blit(text_surface_44,text_rect_44)
+            screen.blit(text_surface_45,text_rect_45)
+            screen.blit(text_surface_46,text_rect_46)
+            screen.blit(text_surface_47,text_rect_47)
+            screen.blit(text_surface_48, text_rect_48)
+            screen.blit(text_surface_49, text_rect_49)
+            screen.blit(text_surface_50, text_rect_50)
+            screen.blit(text_surface_51, text_rect_51)
+            screen.blit(text_surface_52,text_rect_52)
+            screen.blit(text_surface_53,text_rect_53)
+            screen.blit(text_surface_54,text_rect_54)
+            screen.blit(text_surface_54,(830,750))
+            # aici trb sa fie modificata matricea date_leaderboard deja
+            #
+            text_56 = date_leaderboard[0][0]
+            text_surface_56 = font_meniu.render(text_56, True, gold)
+            text_rect_56 = text_surface_56.get_rect()
+            text_rect_56.center = (375, 280)
+
+            text_57= date_leaderboard[1][0]
+            text_surface_57 = font_meniu.render(text_57, True, silver)
+            text_rect_57 = text_surface_57.get_rect()
+            text_rect_57.center = (375, 380)
+
+            text_58 = date_leaderboard[2][0]
+            text_surface_58 = font_meniu.render(text_58, True, bronze)
+            text_rect_58 = text_surface_58.get_rect()
+            text_rect_58.center = (375, 480)
+
+            text_59 = date_leaderboard[2][0]
+            text_surface_59 = font_meniu.render(text_59, True, white)
+            text_rect_59 = text_surface_59.get_rect()
+            text_rect_59.center = (375, 580)
+
+            text_60 = date_leaderboard[4][0]
+            text_surface_60 = font_meniu.render(text_60, True, white)
+            text_rect_60 = text_surface_60.get_rect()
+            text_rect_60.center = (370, 680)
+            screen.blit(text_surface_56,text_rect_56)
+            screen.blit(text_surface_57,text_rect_57)
+            screen.blit(text_surface_58,text_rect_58)
+            screen.blit(text_surface_59,text_rect_59)
+            screen.blit(text_surface_60,text_rect_60)
+
+            text_61 = date_leaderboard[0][1]
+            text_surface_61 = fontnormal2.render(text_61, True, gold)
+            text_rect_61 = text_surface_61.get_rect()
+            text_rect_61.center = (680, 280)
+
+            text_62 = date_leaderboard[1][1]
+            text_surface_62 = fontnormal2.render(text_62, True, silver)
+            text_rect_62 = text_surface_62.get_rect()
+            text_rect_62.center = (680, 380)
+
+            text_63 = date_leaderboard[2][1]
+            text_surface_63 = fontnormal2.render(text_63, True, bronze)
+            text_rect_63 = text_surface_63.get_rect()
+            text_rect_63.center = (680, 480)
+
+            text_64 = date_leaderboard[3][1]
+            text_surface_64 = fontnormal2.render(text_64, True, white)
+            text_rect_64 = text_surface_64.get_rect()
+            text_rect_64.center = (680, 580)
+
+            text_65 = date_leaderboard[4][1]
+            text_surface_65 = fontnormal2.render(text_65, True, white)
+            text_rect_65 = text_surface_65.get_rect()
+            text_rect_65.center = (680, 680)
+
+            screen.blit(text_surface_61, text_rect_61)
+            screen.blit(text_surface_62, text_rect_62)
+            screen.blit(text_surface_63, text_rect_63)
+            screen.blit(text_surface_64, text_rect_64)
+            screen.blit(text_surface_65, text_rect_65)
+
+            text_66 = date_leaderboard[0][2]
+            text_surface_66 = fontnormal2.render(text_66, True, gold)
+            text_rect_66 = text_surface_66.get_rect()
+            text_rect_66.center = (860, 280)
+
+            text_67 = date_leaderboard[1][2]
+            text_surface_67 = fontnormal2.render(text_67, True, silver)
+            text_rect_67 = text_surface_67.get_rect()
+            text_rect_67.center = (860, 380)
+
+            text_68 = date_leaderboard[2][2]
+            text_surface_68 = fontnormal2.render(text_68, True, bronze)
+            text_rect_68 = text_surface_68.get_rect()
+            text_rect_68.center = (860, 480)
+
+            text_69 = date_leaderboard[3][2]
+            text_surface_69 = fontnormal2.render(text_69, True, white)
+            text_rect_69 = text_surface_69.get_rect()
+            text_rect_69.center = (860, 580)
+
+            text_70 = date_leaderboard[4][2]
+            text_surface_70 = fontnormal2.render(text_70, True, white)
+            text_rect_70 = text_surface_70.get_rect()
+            text_rect_70.center = (860, 680)
+
+            screen.blit(text_surface_66, text_rect_66)
+            screen.blit(text_surface_67, text_rect_67)
+            screen.blit(text_surface_68, text_rect_68)
+            screen.blit(text_surface_69, text_rect_69)
+            screen.blit(text_surface_70, text_rect_70)
         elif show_credentials==1:
             screen.blit(text_surface_27,text_rect_27)
             screen.blit(text_surface_28,text_rect_28)

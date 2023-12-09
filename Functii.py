@@ -63,6 +63,7 @@ def draw_board():
 def show_timer(seconds):
     font = pygame.font.Font(None, 120) # FONTUL TIMMERULUI
     screen.fill(albastru)
+    show_text_timer()
     text = font.render(str(seconds), True, (0, 0, 0))
     text_rect = text.get_rect(center=(450, 450))
     screen.blit(text, text_rect)
