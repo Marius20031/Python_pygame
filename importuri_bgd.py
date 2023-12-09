@@ -43,6 +43,21 @@ text_surface3=font_mediu.render(text3,True,white)
 text_rect3=text_surface3.get_rect()
 text_rect3.center=(247,740)
 
+text71="Press this to rotate the"
+text_surface71=font_mediu.render(text71,True,white)
+text_rect_71=text_surface71.get_rect()
+text_rect_71.center=(720,740)
+
+text73="Press this to start the game:"
+text_surface73=font_mediu.render(text73,True,gri)
+text_rect_73=text_surface73.get_rect()
+text_rect_73.center=(200,110)
+
+text72="selected boat:"
+text_surface72=font_mediu.render(text72,True,white)
+text_rect_72=text_surface72.get_rect()
+text_rect_72.center=(720,780)
+
 text4="Boat A:"
 text_surface4=font_mic.render(text4,True,white)
 text_rect4=text_surface4.get_rect()
@@ -160,6 +175,21 @@ def afisare_barci():
     screen.blit(text_surface7, text_rect7)
     screen.blit(text_surface8,text_rect8)
     screen.blit(text_surface9,text_rect9)
+    screen.blit(text_surface71,text_rect_71)
+    screen.blit(text_surface72, text_rect_72)
+    rotate_button = pygame.Rect(660, 800, 120, 50)
+    pygame.draw.rect(screen, albastru, rotate_button)
+    button_text = button_font.render("Rotate", True, (255, 255, 255))
+    screen.blit(button_text, (682, 813))
+    screen.blit(text_surface73,text_rect_73)
+
+    start_button = pygame.Rect(430, 80, 120, 50)
+    pygame.draw.rect(screen, albastru, start_button)
+    button_text_1 = button_font.render("Start", True, (255, 255, 255))
+    screen.blit(button_text_1, (460, 92))
+
+
+
 def show_background():
     screen.blit(background,(60,300))
     screen.blit(background2,(525,300))
@@ -294,6 +324,7 @@ def incepe_timer(idx,trebuie_timer,nr_sec,wait_time,bot):
         pygame.time.delay(1000)
         if bot==1:
             if wait_time==-1:
+                nr_sec[0]=sec
                 sec=-2
             wait_time-=1
         if(sec==-1):

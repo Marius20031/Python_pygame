@@ -121,19 +121,20 @@ def run_game():
     if mai_continua[0] == 0:
         running = False
     else:
-        timer()
+        #timer()
+        print("")
     afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
     button_font = pygame.font.Font(None, 36)
-    rotate_button = pygame.Rect(50, 50, 100, 50)
-    start_button = pygame.Rect(350, 50, 100, 50)
+    rotate_button = pygame.Rect(660, 800, 120, 50)
+    start_button = pygame.Rect(430, 80, 120, 50)
 
-    pygame.draw.rect(screen, (255, 0, 0), start_button)
+    #pygame.draw.rect(screen, (255, 0, 0), start_button)
     pygame.draw.rect(screen, (255, 0, 0), rotate_button)
 
-    button_text = button_font.render("Rotate", True, (255, 255, 255))
+    #button_text = button_font.render("Rotate", True, (255, 255, 255))
     button_text_1 = button_font.render("Start", True, (255, 255, 255))
 
-    screen.blit(button_text, (60, 60))
+    #screen.blit(button_text, (660, 800))
     screen.blit(button_text_1, (360, 60))
     global trebuie_timer  # scris de mn
 
@@ -150,22 +151,29 @@ def run_game():
     # Post the custom event to the queue
     while running:
         global nr_sec
-        print(username_conectat[0])
+        #print(username_conectat[0])
         button_font = pygame.font.Font(None, 36)
         if joc_e_gata[0]==0:
             if jucam_cu_bot[0]==1:
                 if al_cui_e_randul[0] == 1:
                     bot_alege_pozitie()
                     random_time_sleep=random.randint(1,3)
-                    incepe_timer(1,trebuie_timer,[30],random_time_sleep,1)
+                    incepe_timer(1,trebuie_timer,nr_sec,random_time_sleep,1)
                     trebuie_timer[0] = 1
-                    nr_sec=[30]
+                    #nr_sec=[30]
                     # aici e botul de fapt
                     runda_player_main(var_x[0], var_y[0])
+                    print(al_cui_e_randul[0])
+                    print(nr_sec[0])
+                    if al_cui_e_randul[0]!=1:
+                        nr_sec[0]=30
+                        semnal=1
+                    else:
+                        semnal=0
                     if check_if_game_over() == 1:
                         #print("JOCUL E GATA!!! castiga BOTUL!!")
                         joc_e_gata[0] = 1
-                    semnal=1
+                   # semnal=1
         if semnal==0:
             for event in pygame.event.get():
                 ok2=0
@@ -241,6 +249,10 @@ def run_game():
                                     if check_if_game_over() == 2:
                                         #print("JOCUL E GATA!!! castiga MARIUS!!!")
                                         joc_e_gata[0]=1
+                                    if al_cui_e_randul[0]!=0:
+                                        nr_sec[0]=30
+                                    else:
+                                        semnal=1
                                 # si intra direct mutarea botului
                             # matricea adversarului
                             else:
@@ -302,12 +314,10 @@ def run_game():
         screen.blit(fundal,(0,0))
         show_background() #bogdan
         draw_board()  # desenam
-        pygame.draw.rect(screen, (255, 0, 0), rotate_button)
-        pygame.draw.rect(screen, (255, 0, 0), start_button)
-        button_text = button_font.render("Rotate", True, (255, 255, 255))
-        button_text_1 = button_font.render("Start", True, (255, 255, 255))
-        screen.blit(button_text, (60, 60))
-        screen.blit(button_text_1, (360, 60))
+        #pygame.draw.rect(screen, (255, 0, 0), start_button)
+        #button_text_1 = button_font.render("Start", True, (255, 255, 255))
+        #screen.blit(button_text, (680, 810))
+        #screen.blit(button_text_1, (360, 60))
 
         color_1=(65,84,178)
         color_2 = (58, 45, 240)
