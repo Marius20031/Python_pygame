@@ -73,7 +73,7 @@ tupla_cu_cercuri = np.zeros((551, 2))
 tupla_ai_nimerit=np.zeros(551)
 # afisare eroare
 merge=[1,1,1]
-jucam_cu_bot=[0]
+jucam_cu_bot=[1]
 tin_randomizarea=[-1,-1,-1,-1]
 alege_first_time=[1]
 var_x=[0]
