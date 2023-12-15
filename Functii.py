@@ -157,7 +157,7 @@ def run_game():
             if jucam_cu_bot[0]==1:
                 if al_cui_e_randul[0] == 1:
                     bot_alege_pozitie()
-                    random_time_sleep=random.randint(1,3)
+                    random_time_sleep=random.randint(1,2)
                     incepe_timer(1,trebuie_timer,nr_sec,random_time_sleep,1)
                     trebuie_timer[0] = 1
                     #nr_sec=[30]

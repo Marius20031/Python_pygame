@@ -638,7 +638,7 @@ def enter_menu(mai_continua):
 
                 if text_rect_22.collidepoint(event.pos):
                     show_credentials=3
-
+                    get_leaderboard()
                     ## !!! aici trb apelata functia care modifica matricea de leaderboard sau o returneaza idk, nu conteaza !!!  ##
                     # cv gen get_leaderboad(date_leaderboard)
                 if text_rect_33.collidepoint(event.pos):
@@ -707,6 +707,8 @@ def enter_menu(mai_continua):
             screen.blit(text_surface_54,(830,750))
             # aici trb sa fie modificata matricea date_leaderboard deja
             #
+            date_leaderboard=matrice_leaderboard
+            #print(date_leaderboard)
             text_56 = date_leaderboard[0][0]
             text_surface_56 = font_meniu.render(text_56, True, gold)
             text_rect_56 = text_surface_56.get_rect()

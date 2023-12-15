@@ -1,14 +1,14 @@
-import random
-from random import random
+
 import hashlib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
+import random
 from Functii import *
+
 from runde import *
 
-uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
-#uri = "mongodb+srv://bodo2003:eoXq7eK98PQyfwsm@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
+#uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://bodo2003:eoXq7eK98PQyfwsm@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -19,10 +19,10 @@ def get_leaderboard():
     var_documente=collection.find({}).sort("xp", -1)
     for document in var_documente:
         username = document.get("username")
-        xp = document.get("xp")
-        level =int(xp/10)
+        xp = str(document.get("xp"))
+        level =str(int(int(xp)/10))
 
-        matrice_leaderboard.append([username, xp, level])
+        matrice_leaderboard.append([username, level, xp])
     print(matrice_leaderboard)
 
 
