@@ -121,37 +121,33 @@ def run_game():
     if mai_continua[0] == 0:
         running = False
     else:
-        #timer()
+        timer()
         print("")
-    afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
+    afisare_icon_bot()
     button_font = pygame.font.Font(None, 36)
     rotate_button = pygame.Rect(660, 800, 120, 50)
     start_button = pygame.Rect(430, 80, 120, 50)
 
-    #pygame.draw.rect(screen, (255, 0, 0), start_button)
     pygame.draw.rect(screen, (255, 0, 0), rotate_button)
 
-    #button_text = button_font.render("Rotate", True, (255, 255, 255))
     button_text_1 = button_font.render("Start", True, (255, 255, 255))
 
-    #screen.blit(button_text, (660, 800))
     screen.blit(button_text_1, (360, 60))
-    global trebuie_timer  # scris de mn
+    global trebuie_timer
 
     last_one_tho=None
     move_board2()
     semafor_start_game = 0 # nu s.a apasat start
-    #if jucam_cu_bot[0]==1:
+
     creare_matrice_barci_poz()
     CUSTOM_MOUSEMOTION_EVENT = pygame.USEREVENT + 1
     semnal=0
-    semnal2=0
     def simulate_mouse_motion():
         pygame.event.post(pygame.event.Event(CUSTOM_MOUSEMOTION_EVENT))
     # Post the custom event to the queue
+    bot_win = 0
     while running:
         global nr_sec
-        #print(username_conectat[0])
         button_font = pygame.font.Font(None, 36)
         if joc_e_gata[0]==0:
             if jucam_cu_bot[0]==1:
@@ -171,7 +167,9 @@ def run_game():
                     else:
                         semnal=0
                     if check_if_game_over() == 1:
-                        #print("JOCUL E GATA!!! castiga BOTUL!!")
+                        print("JOCUL E GATA!!! castiga BOTUL!!")
+                        bot_win = 1
+                        # MESAJ CASTIGA BOT
                         joc_e_gata[0] = 1
                    # semnal=1
         if semnal==0:
@@ -247,7 +245,9 @@ def run_game():
                                     runda_bot(mouse_x, mouse_y,trebuie_timer)
                                     ##print(trebuie_timer[0])
                                     if check_if_game_over() == 2:
-                                        #print("JOCUL E GATA!!! castiga MARIUS!!!")
+                                        print("JOCUL E GATA!!! castiga MARIUS!!!")
+
+                                        #MESAJ CASTIGA PLAYERU
                                         joc_e_gata[0]=1
                                     if al_cui_e_randul[0]!=0:
                                         nr_sec[0]=30
@@ -349,7 +349,44 @@ def run_game():
             #merge[2] = 1
         afisare_contur_timer()
         afisare_timer_default()
+        if joc_e_gata[0] == 1 and bot_win == 0:
+            castig_player = "WINNER"
+            castig_player_surface = font_urias.render(castig_player, True, green)
+            castig_player_rect = castig_player_surface.get_rect()
+            castig_player_rect.center = (500, 200)
+            screen.blit(castig_player_surface, castig_player_rect)
+            trebuie_timer[0] = 0
+            colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
 
+            class Confetti:
+                def __init__(self):
+                    self.x = random.randint(0, width)
+                    self.y = random.randint(0, height)
+                    self.color = random.choice(colors)
+                    self.speed = random.randint(1, 5)
+                    self.size = random.randint(5, 15)
+
+                def move(self):
+                    self.y += self.speed
+                    if self.y > height:
+                        self.y = 0
+                        self.x = random.randint(0, width)
+
+                def draw(self):
+                    pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size * 1.5))
+
+            confetti_pieces = [Confetti() for _ in range(100)]
+            for confetti in confetti_pieces:
+                confetti.move()
+                confetti.draw()
+
+        elif joc_e_gata[0] == 1 and bot_win == 1:
+            castig_bot = "LOSER"
+            castig_bot_surface = font_urias.render(castig_bot, True, red)
+            castig_bot_rect = castig_bot_surface.get_rect()
+            castig_bot_rect.center = (500, 200)
+            screen.blit(castig_bot_surface, castig_bot_rect)
+            trebuie_timer[0] = 0
         for uwu in range(0, nr_total_cercuri[0]):
             if tupla_ai_nimerit[uwu]:
                 global explozie
@@ -359,6 +396,7 @@ def run_game():
             else:
                 screen.blit(x_mare, (tupla_cu_cercuri[uwu][0] - 20, tupla_cu_cercuri[uwu][1] - 20))
                 #pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)  # are prioritate mai mare
+        pygame.time.Clock().tick(24) #max framerate
         pygame.display.flip()  # faceme update mere in running
         if semnal==1:
             semnal=0
