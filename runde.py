@@ -6,6 +6,9 @@ from Functii import *
 from Importuri import *
 import pygame
 import numpy as np
+
+from importuri_bgd import error_cannot_make_same_move
+
 global al_cui_e_randul
 def runda_player_main(mouse_x,mouse_y):
     global nr_sec

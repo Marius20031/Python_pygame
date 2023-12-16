@@ -7,8 +7,9 @@ from Functii import *
 
 from runde import *
 
-uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
+#uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
 #uri = "mongodb+srv://bodo2003:eoXq7eK98PQyfwsm@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://robert:LnKSGSt39JNt_@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 
 client = MongoClient(uri, server_api=ServerApi('1'))
