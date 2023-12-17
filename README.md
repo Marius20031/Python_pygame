@@ -16,8 +16,9 @@ a botului.Dimensiunea barcilor, daca jugam guest, bot etc.
 Functii.py / aka main
 	Apelarea implementarilor din fiecare fisier.py apelarea functiilor pentru a ajunge la produsul final.
 	--BOGDAN LEADERBOARD ETC INAINTE:--		
-	Creearea gameplay.ului fiind inceput cu player.ul care isi alege pozitiile initiale ale barcilor, cazurilie speciale fiind tratate
+	Creearea gameplay.ului fiind inceput cu player.ul care isi alege pozitiile initiale ale barcilor, cazurilie speciale fiind tratate.
 	De asemenea, dupa apasarea butonului de start, barcile isi dau "lock" cu ajutorul var globlae in importuri.py si incepe jocul propriu-zis.
+ 
 Bot.py:
 	Toate functiile specifice botului ca de ex: Randomizarea pe matrice a mutarii, luand cu random pe matrice un numar
 si daca a fost deja mutarea asta, muta altceva randomizand iar, also pentru optimizarea botului daca nimereste o barca, se va duce in directia in 
