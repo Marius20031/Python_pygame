@@ -91,7 +91,12 @@ def create_try(username,password):
         collection.insert_one(data_to_insert)
         print("Utilizator creeat cu succes")
         return 0
-
+def get_lvl():
+    query = {
+        'username': username_conectat[0],
+    }
+    var = collection.find_one(query)
+    return str(int(int(var.get('xp'))/10))
 def adauga_xp_lovire_buna():
     query = {
         'username': username_conectat[0],

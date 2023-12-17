@@ -403,6 +403,8 @@ def run_game():
         afisare_playeri()  # scris de mn
         if (semafor_start_game == 0): #scris de mn
             afisare_barci()
+        if semafor_start_game==1:
+            show_level()
         if merge[0]==0:
             error_boats_not_in_correct_position()
         if merge[1] == 0:

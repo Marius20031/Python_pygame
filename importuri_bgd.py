@@ -19,6 +19,7 @@ green=(0,255,0)
 gold=(255,223,0)
 bronze=(205,127,50)
 silver=(165,169,180)
+roz=(255,1,90)
 x=1
 
 fontnormal=pygame.font.Font(None,40)
@@ -864,5 +865,42 @@ def enter_menu(mai_continua):
             else:
                 screen.blit(password_surface, (password_input.x + 5, password_input.y + 6))
         pygame.display.flip()
+romb1=[(90, 5), (50, 45), (90, 85), (130, 45)]
+romb2=[(790, 5), (750, 45), (790, 85), (830, 45)]
 
+romb3=pygame.image.load("Photos/clipart729511.png")
+romb3=romb3.convert_alpha()
+romb3=pygame.transform.smoothscale(romb3,(80,80))
+text_74="999"
+text_surface_74=fontnormal.render(text_74,True,white)
+text_rect_74=text_surface_74.get_rect()
+text_rect_74.center=(790,45)
+
+text_75=""
+text_surface_75=fontnormal.render(text_75,True,white)
+text_rect_75=text_surface_75.get_rect()
+
+def seteaza_level():
+    global username_conectat
+    global text_75
+    global text_surface_75
+    global text_rect_75
+    if username_conectat[0]=="":
+        text_75="0"
+    else:
+        text_75=get_lvl()
+    text_surface_75 = fontnormal.render(text_75, True, white)
+    text_rect_75 = text_surface_75.get_rect()
+    text_rect_75.center = (90, 45)
+
+def show_level():
+    global text_75
+    #if text_75=="":
+    seteaza_level()
+    #pygame.draw.polygon(screen,gri,romb1)  # romb gri
+    #pygame.draw.polygon(screen,gri,romb2)  # romb gri
+    screen.blit(romb3,(750,5))   # comentat asta daca vrei romb gri
+    screen.blit(romb3, (52, 5))  # comentat asta daca vrei romb gri
+    screen.blit(text_surface_74,text_rect_74)
+    screen.blit(text_surface_75,text_rect_75)
 #pana aici scris de mn
