@@ -80,6 +80,7 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
     #print("------------------------")
     #global al_cui_e_randul
     global nr_sec
+    vvvv=0 # de iesit
     for x in range(130, 230, 10):
         for q in range(75, 180, 10):
             x = float(x / 10)
@@ -89,7 +90,7 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                 #print(q)
                 #print("da")
                 # a gasit poz in matrice si e pozitia
-                if mat_adversar[int(q - 7.5)][int(x - 13)] == 2:
+                if mat_adversar[int(q - 7.6)][int(x - 13.2)] == 2:
                     #print("ai facut deja asta, fa altceva!")
                     merge[1] = 0
                     #error_cannot_make_same_move()
@@ -97,7 +98,7 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                 else:
                     merge[1] = 1
                     nu=1
-                    if mat_adversar[int(q - 7.5)][int(x - 13)] == 1:
+                    if mat_adversar[int(q - 7.6)][int(x - 13.2)] == 1:
                         tupla_ai_nimerit[nr_total_cercuri[0]] = 1
                         # daca a nimerit ii dau mai mult xp
                         if e_guest[0]==0:
@@ -107,13 +108,19 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                     else:
                         if e_guest[0] == 0:
                             adauga_xp_ratare()
-                    mat_adversar[int(q - 7.5)][int(x - 13)] = 2
+                    mat_adversar[int(q - 7.6)][int(x - 13.2)] = 2
                     # a m intervalul dat de variabilele x si x+1 deci
                     tupla_cu_cercuri[nr_total_cercuri[0]][0]=(2 * x + 1) / 2 * cell_size
                     tupla_cu_cercuri[nr_total_cercuri[0]][1]=(2 * q + 1) / 2 * cell_size
                     nr_total_cercuri[0] += 1 # ca sa iau range
                     al_cui_e_randul[0]= nu
                     #nr_sec[0]=30
+                    if al_cui_e_randul[0] == 0:
+                        # print("mutare invalida aka apasa random 3")
+                        trebuie_timer[0] = 1
+                    print("AAAAAAAAAAAAAAAAAAAA")
+                if vvvv==1:
+                    return;
             x = x * 10
             q = q * 10
     #print("player")
