@@ -9,8 +9,32 @@ from bot import *
 from importuri_bgd import *
 circle_color_rosu = (255, 0, 0)
 circle_color_verde = (0, 128, 0)
+
+
+barca=pygame.image.load("Photos/aircraft-carrier-amphibious-warfare-ship-navy-fast-attack-craft-ship-65ee4dc1359d19cd881525eaf9a4c4bd.png")
+barca=barca.convert_alpha()
+barca=pygame.transform.smoothscale(barca,(235,180))
+
+dinghy = pygame.image.load("Photos/dingy2.png.png")
+dinghy = dinghy.convert_alpha()
+dinghy = pygame.transform.smoothscale(dinghy,( 88, 40))
+dinghy = pygame.transform.rotate(dinghy,180)
+
+barca2 = pygame.image.load("Photos/Daco_2380481.png")
+barca2 = barca2.convert_alpha()
+barca2 = pygame.transform.smoothscale(barca2,( 140, 90))
+
+barca3 = pygame.image.load("Photos/barca3.png")
+barca3 = barca3.convert_alpha()
+barca3 = pygame.transform.smoothscale(barca3,( 175, 70))
+
+barci_rotite=[0,0,0,0]
 def rotate_boats(selected):
-    #global boats
+    global dinghy
+    global barca
+    global barca2
+    global barca3
+    global barci_rotite
     global boat_width_1
     global boat_width_2
     global boat_width_3
@@ -32,18 +56,42 @@ def rotate_boats(selected):
             boat_width, boat_height = boat_width_1, boat_height_1
             boat_width_1, boat_height_1 = boat_height, boat_width
             boats[selected]= boat_width_1, boat_height_1
+            if barci_rotite[0]==0:
+                dinghy=pygame.transform.rotate(dinghy,270)
+                barci_rotite[0]=1
+            else:
+                dinghy = pygame.transform.rotate(dinghy, -270)
+                barci_rotite[0] = 0
         elif selected == 1:
             boat_width, boat_height = boat_width_2, boat_height_2
             boat_width_2, boat_height_2 = boat_height, boat_width
             boats[selected] = boat_width_2, boat_height_2
+            if barci_rotite[1]==0:
+                barca2=pygame.transform.rotate(barca2,90)
+                barci_rotite[1]=1
+            else:
+                barca2 = pygame.transform.rotate(barca2, -90)
+                barci_rotite[1] = 0
         elif selected == 2:
             boat_width, boat_height = boat_width_3, boat_height_3
             boat_width_3, boat_height_3 = boat_height, boat_width
             boats[selected] = boat_width_3, boat_height_3
+            if barci_rotite[2]==0:
+                barca3 = pygame.transform.rotate(barca3,90)
+                barci_rotite[2]=1
+            else:
+                barca3 = pygame.transform.rotate(barca3, -90)
+                barci_rotite[2] = 0
         elif selected == 3:
             boat_width, boat_height = boat_width_4, boat_height_4
             boat_width_4, boat_height_4 = boat_height, boat_width
             boats[selected] = boat_width_4, boat_height_4
+            if barci_rotite[3]==0:
+                barca=pygame.transform.rotate(barca,90)
+                barci_rotite[3]=1
+            else:
+                barci_rotite[3]=0
+                barca=pygame.transform.rotate(barca,-90)
         boats[selected] = (boat_x, boat_y) #!!!!!!!!!!!!!!
 def draw_board():
     for i in range(11):
@@ -123,35 +171,31 @@ def run_game():
     else:
         #timer()
         print("")
-    afisare_icon_bot()  # scris de mn pt a genera random poza pt bot
+    afisare_icon_bot()
     button_font = pygame.font.Font(None, 36)
     rotate_button = pygame.Rect(660, 800, 120, 50)
     start_button = pygame.Rect(430, 80, 120, 50)
 
-    #pygame.draw.rect(screen, (255, 0, 0), start_button)
     pygame.draw.rect(screen, (255, 0, 0), rotate_button)
 
-    #button_text = button_font.render("Rotate", True, (255, 255, 255))
     button_text_1 = button_font.render("Start", True, (255, 255, 255))
 
-    #screen.blit(button_text, (660, 800))
     screen.blit(button_text_1, (360, 60))
-    global trebuie_timer  # scris de mn
+    global trebuie_timer
 
     last_one_tho=None
     move_board2()
     semafor_start_game = 0 # nu s.a apasat start
-    #if jucam_cu_bot[0]==1:
+
     creare_matrice_barci_poz()
     CUSTOM_MOUSEMOTION_EVENT = pygame.USEREVENT + 1
     semnal=0
-    semnal2=0
     def simulate_mouse_motion():
         pygame.event.post(pygame.event.Event(CUSTOM_MOUSEMOTION_EVENT))
     # Post the custom event to the queue
+    bot_win = 0
     while running:
         global nr_sec
-        #print(username_conectat[0])
         button_font = pygame.font.Font(None, 36)
         if joc_e_gata[0]==0:
             if jucam_cu_bot[0]==1:
@@ -171,7 +215,9 @@ def run_game():
                     else:
                         semnal=0
                     if check_if_game_over() == 1:
-                        #print("JOCUL E GATA!!! castiga BOTUL!!")
+                        print("JOCUL E GATA!!! castiga BOTUL!!")
+                        bot_win = 1
+                        # MESAJ CASTIGA BOT
                         joc_e_gata[0] = 1
                    # semnal=1
         if semnal==0:
@@ -247,7 +293,9 @@ def run_game():
                                     runda_bot(mouse_x, mouse_y,trebuie_timer)
                                     ##print(trebuie_timer[0])
                                     if check_if_game_over() == 2:
-                                        #print("JOCUL E GATA!!! castiga MARIUS!!!")
+                                        print("JOCUL E GATA!!! castiga MARIUS!!!")
+
+                                        #MESAJ CASTIGA PLAYERU
                                         joc_e_gata[0]=1
                                     if al_cui_e_randul[0]!=0:
                                         nr_sec[0]=30
@@ -323,19 +371,35 @@ def run_game():
         color_2 = (58, 45, 240)
         color_3 = (232, 252, 56)
         color_4 = (48, 195, 126)
-        for i, (boat_x, boat_y) in enumerate(boats):# ok deci boats pentru desenare dar _VECT pt pozitionarea tragerii!!!
+        for i, (boat_x, boat_y) in enumerate(boats):  # ok deci boats pentru desenare dar _VECT pt pozitionarea tragerii!!!
             if i == selected:
                 color = (255, 0, 0)  # se face rosu cand ii dam drag
             else:
-                color = (0, 0, 255)  #culoarea default
+                color = (0, 0, 255)  # culoarea default
             if i == 0:
-                pygame.draw.rect(screen, color_1, (boat_x, boat_y, boat_width_1, boat_height_1))
+                # pygame.draw.rect(screen, color_1, (boat_x, boat_y, boat_width_1, boat_height_1))
+                if barci_rotite[0]==0:
+                    screen.blit(dinghy, (boat_x - 3, boat_y ))
+                else:
+                    screen.blit(dinghy,(boat_x+2, boat_y-4 ))
             elif i == 1:
-                pygame.draw.rect(screen, color_2, (boat_x, boat_y, boat_width_2, boat_height_2))
+                #pygame.draw.rect(screen, color_2, (boat_x, boat_y, boat_width_2, boat_height_2))
+                if barci_rotite[1]==0:
+                    screen.blit(barca2,(boat_x-10 , boat_y - 50))
+                else:
+                    screen.blit(barca2, (boat_x-51, boat_y - 7))
             elif i == 2:
-                pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
+                #pygame.draw.rect(screen, color_3, (boat_x, boat_y, boat_width_3, boat_height_3))
+                if barci_rotite[2]==0:
+                    screen.blit(barca3, (boat_x -8, boat_y - 30))
+                else:
+                    screen.blit(barca3, (boat_x - 30, boat_y - 9))
             elif i == 3:
-                pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
+                # pygame.draw.rect(screen, color_4, (boat_x, boat_y, boat_width_4, boat_height_4))
+                if barci_rotite[3]==0:
+                    screen.blit(barca, (boat_x - 18, boat_y - 70))
+                else:
+                    screen.blit(barca, (boat_x - 72, boat_y - 58))
         afisare_playeri()  # scris de mn
         if (semafor_start_game == 0): #scris de mn
             afisare_barci()
@@ -349,7 +413,44 @@ def run_game():
             #merge[2] = 1
         afisare_contur_timer()
         afisare_timer_default()
+        if joc_e_gata[0] == 1 and bot_win == 0:
+            castig_player = "WINNER"
+            castig_player_surface = font_urias.render(castig_player, True, green)
+            castig_player_rect = castig_player_surface.get_rect()
+            castig_player_rect.center = (500, 200)
+            screen.blit(castig_player_surface, castig_player_rect)
+            trebuie_timer[0] = 0
+            colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
 
+            class Confetti:
+                def __init__(self):
+                    self.x = random.randint(0, width)
+                    self.y = random.randint(0, height)
+                    self.color = random.choice(colors)
+                    self.speed = random.randint(1, 5)
+                    self.size = random.randint(5, 15)
+
+                def move(self):
+                    self.y += self.speed
+                    if self.y > height:
+                        self.y = 0
+                        self.x = random.randint(0, width)
+
+                def draw(self):
+                    pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size * 1.5))
+
+            confetti_pieces = [Confetti() for _ in range(100)]
+            for confetti in confetti_pieces:
+                confetti.move()
+                confetti.draw()
+
+        elif joc_e_gata[0] == 1 and bot_win == 1:
+            castig_bot = "LOSER"
+            castig_bot_surface = font_urias.render(castig_bot, True, red)
+            castig_bot_rect = castig_bot_surface.get_rect()
+            castig_bot_rect.center = (500, 200)
+            screen.blit(castig_bot_surface, castig_bot_rect)
+            trebuie_timer[0] = 0
         for uwu in range(0, nr_total_cercuri[0]):
             if tupla_ai_nimerit[uwu]:
                 global explozie
@@ -359,6 +460,7 @@ def run_game():
             else:
                 screen.blit(x_mare, (tupla_cu_cercuri[uwu][0] - 20, tupla_cu_cercuri[uwu][1] - 20))
                 #pygame.draw.circle(screen, circle_color_rosu, tupla_cu_cercuri[uwu], 5)  # are prioritate mai mare
+        pygame.time.Clock().tick(24) #max framerate
         pygame.display.flip()  # faceme update mere in running
         if semnal==1:
             semnal=0

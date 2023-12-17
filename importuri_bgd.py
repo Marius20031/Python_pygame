@@ -679,6 +679,7 @@ def enter_menu(mai_continua):
             screen.blit(goback, (20, 930))
             screen.blit(text_surface_33, text_rect_33)
             screen.blit(text_surface_42,text_rect_42)
+            pygame.draw.line(screen, WHITE, (190, 100), (810, 100), 10)
             pygame.draw.line(screen, WHITE, (50,150),(50,830), 5)
             pygame.draw.line(screen, WHITE, (180,150),(180,830), 5)
             pygame.draw.line(screen, WHITE, (580,150),(580,830), 5)
