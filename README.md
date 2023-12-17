@@ -18,7 +18,7 @@ Functii.py / aka main
 	--BOGDAN LEADERBOARD ETC INAINTE:--		
 	Creearea gameplay.ului fiind inceput cu player.ul care isi alege pozitiile initiale ale barcilor, cazurilie speciale fiind tratate
 	De asemenea, dupa apasarea butonului de start, barcile isi dau "lock" cu ajutorul var globlae in importuri.py si incepe jocul propriu-zis
-Bot.py:
+ Bot.py:
 	Toate functiile specifice botului ca de ex: Randomizarea pe matrice a mutarii, luand cu random pe matrice un numar
 si daca a fost deja mutarea asta, muta altceva randomizand iar, also pentru optimizarea botului daca nimereste o barca, se va duce in directia in 
 care mai vede tot 1 pe matrice (adica continuarea barcii) pana ajunge la 2 sau 0 (lovit deja sau e gol)
