@@ -55,6 +55,25 @@ nevoie sa te intorci in meniul principal. Exista si optiunea "play as guest" ce 
 nu iti va fi salvat progresul.
 
 In plus am contribuit prin munca de echipa si la diferite alte aspecte cum ar fi idei pt joc, gasit poze, si alte aspecte ce tin de design.
-		
+
+
+Robert:
+
+importuri_bgd:
+	Am realizat design-ul si implementarea meniului principal de joc, fie dupa selectarea optiunii de "PLAY AS GUEST", fie dupa autentificarea cu credientiale valide.
+ Am adaugat o poza de fundal cu marea pentru matricile in care se desfasoara jocul, precum si o poza pentru fundalul intregului joc. Numele utilizatorului autentificat(sau Guest 
+ urmat de un numar random in cazul in care utilizatorul a ales optiunea de "PLAY AS GUEST") si al botului sunt afisate in partea de mijloc sus a ecranului, in dreptul timer-ului 
+ si alaturi de pozele de profil ale acestora. Utilizatorul isi poate schimba poza de profil cu ajutorul sagetilor de sub poza, cicland prin toate pozele disponibile.De asemenea, 
+ am pozitionat pe ecran in pozitii favorabile diferitele mesaje menite sa usureze utilizarea jocului chiar si de un utilizator nou, precum "Press this to start the gamne", 
+ "Place the boats as you wish", etc. Tot aici am implementat si butoanele pentru startul jocului si pentru rotitul barcilor. Functia de start verifica mai intai daca toate barcile 
+ se afla in pozitii valide, iar, in caz contrar, afiseaza un mesaj de eroare. Barcile player-ului sunt asezate sub matricea sa, ordonate de la cea mai mica la cea mai mare. Acestea
+ au fiecare cate un cod ("A", "B", "C" si "D"), in functie de dimensiune. Fiecare barca are o poza cu o barca de razboi, reprezentativa pentru dimensiunea sa, vazuta de sus.
+ Dupa ce sunt plasate pe matrice, barcile pot fi rotite la 90 de grade, apasand pe butonul de "ROTATE".
+
+ Functii.py:
+ 	Am implementat mesajul de la finalul jocului(fie de winner, fie de loser) ce este determinat de rezultatul jocului. In plus, in cazul in care castiga player-ul, pe
+  ecran vor fi afisate confetti. Confetti-urile au fost implementate cu ajutorul unei clase numite Confetti, care genereaza dreptunghiuri ce au dimensiuni si culori random
+  peste tot pe ecran.
+
  
 		
