@@ -1,3 +1,25 @@
+CIOCHINA MARIUS + CONSTANTIN ROBERT-MIHAI + SAVU BOGDAN (322CB)
+
+GITHUB: https://github.com/Marius20031/Python_pygame
+Am folosit Pycharm cu regula de rulare build in main.(Run 'Main')
+
+De precizat faptul ca jocul la inceput se conecteaza la baza de date MongoDB motiv pentru care
+jocul poate sa fie jucat doar pe calculatoarele conectate la baza de date.
+
+Ca biblioteci am folosit:
+-pentru gameplay-ul dezvoltat - pygame
+-pentru randomizare - random
+-pentru baza de date - pymongo.server_api
+-pentru matrice - numpy
+-pentru functia de hash - hashlib
+-pentru sleep - asyncio
+
+O dificultate intampinata a fost accea cand jocul incepea chiar daca barcile nu erau puse cum trebuie in matrice, am  rezolvat aceasta problema
+iterand prin toata matricea si daca numarul de 1.uri(numarul de puncte din matrice care formeaza barcile) este egal cu numarul de casute pe care
+le ocupa barcile, in seamna ca toate barcile sunt asezate cum trebuie, aceasta soltuie rezolvand ATAT problema barcilor care nu erau puse in matrice
+CAT SI problema barcilor suprapuse in matrice.
+
+De asemenea, am intampinat probleme si la randomizarea barcilor pe matrice, am tot cautat metode optime de generare.
 Marius:
 
 Runde.py:
@@ -13,9 +35,8 @@ Importuri.py:
 	Functia in care mi.am declarat toate variabiile folosite pentru a identifica turele jucatorilor, matricea barcilor adversarului cat si
 a botului.Dimensiunea barcilor, daca jugam guest, bot etc.
 
-Functii.py / aka main
-	Apelarea implementarilor din fiecare fisier.py apelarea functiilor pentru a ajunge la produsul final.
-	--BOGDAN LEADERBOARD ETC INAINTE:--		
+Functii.py / aka (shadow)main
+	Apelarea implementarilor din fiecare fisier.py apelarea functiilor pentru a ajunge la produsul final.		
 	Creearea gameplay.ului fiind inceput cu player.ul care isi alege pozitiile initiale ale barcilor, cazurilie speciale fiind tratate.
 	De asemenea, dupa apasarea butonului de start, barcile isi dau "lock" cu ajutorul var globlae in importuri.py si incepe jocul propriu-zis.
  
@@ -25,13 +46,15 @@ si daca a fost deja mutarea asta, muta altceva randomizand iar, also pentru opti
 care mai vede tot 1 pe matrice (adica continuarea barcii) pana ajunge la 2 sau 0 (lovit deja sau e gol).
 	Aici am implementat si randomizarea barcilor pe matrice:
 Se alege random o barca ded orice dimensiune si se baga intr.un vector,(daca a fost aleasa, se randomizeaza iar pana se ia o barca care nu a fost pusa pana acum
-pe matrice) dupa ce s.a alez barca se elge randomm orientarea barcii (verticala orizontala) dupa, aleg o pozitie random de pe matrice, iterez pe viitoare "barca"care 
+pe matrice) dupa ce s.a aleg barca se elge randomm orientarea barcii (verticala orizontala) dupa, aleg o pozitie random de pe matrice, iterez pe viitoare "barca"care 
 ar urma sa vina, daca e totul liber, o pun si o marchez folosita pentru urmatoarele randomizari altfel, reintru in while.ul infinit care se opreste doar cand am 4 randomizari
 corecte, 4 returnuri de true adica 4 barci pe matrice cu pozitii validie.
 
 Full_database.py:
 	Toate functiile legate de baza de date, de la conectare pana la clasament, verificare login, create account si restul functiilor
-necesare. Implementare xp in baza de date si hashuirea parolei.
+necesare. Implementare xp in baza de date si hashuirea parolei.Am folosit conectarea la MongoDB Atlas dat fiind faptul ca am mai avut interactiuni
+cu acest tip de baza de date.XP.ul este implementat la modul, daca nimeresti o barca adversa ai +15 daca nu nimeresti ai +5, Lv.ul fiind dar de impartirea
+la 10
 
 
 Bogdan:
@@ -54,8 +77,8 @@ in urma unei operatii reusite de create account respectiv log in vor aparea dire
 nevoie sa te intorci in meniul principal. Exista si optiunea "play as guest" ce va duce direct la inceperea jocului fara a mai fi nevoie sa te autentifici inainte, insa astfel
 nu iti va fi salvat progresul.
 
-In plus am contribuit prin munca de echipa si la diferite alte aspecte cum ar fi idei pt joc, gasit poze, si alte aspecte ce tin de design, unul dintre ele fiind afisarea level-ului
-playerului si al botului langa numele lor dupa ce se apasa butonul de start.
+In plus am contribuit prin munca de echipa si la diferite alte aspecte cum ar fi idei pt joc, gasit poze, si alte aspecte ce tin de design.
+
 
 Robert:
 
