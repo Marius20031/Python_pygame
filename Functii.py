@@ -205,6 +205,8 @@ def run_game():
                         joc_e_gata[0] = 1
         if semnal==0:
             for event in pygame.event.get():
+                if semnal==1:
+                    break
                 ok2=0
                 while (trebuie_timer[0] == 1):  # incepe timeru cand e nevoie de el
                     event2 = incepe_timer(al_cui_e_randul[0], trebuie_timer, nr_sec,0,0)
