@@ -2,7 +2,7 @@ CIOCHINA MARIUS + CONSTANTIN ROBERT-MIHAI + SAVU BOGDAN (322CB)
 
 GITHUB: https://github.com/Marius20031/Python_pygame
 Am folosit Pycharm cu regula de rulare build in main.(Run 'Main')
-
+(TO SEE: Poze_Proiect)
 De precizat faptul ca jocul la inceput se conecteaza la baza de date MongoDB motiv pentru care
 jocul poate sa fie jucat doar pe calculatoarele conectate la baza de date.
 
