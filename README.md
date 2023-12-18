@@ -74,6 +74,7 @@ importuri_bgd:
  	Am implementat mesajul de la finalul jocului(fie de winner, fie de loser) ce este determinat de rezultatul jocului. In plus, in cazul in care castiga player-ul, pe
   ecran vor fi afisate confetti. Confetti-urile au fost implementate cu ajutorul unei clase numite Confetti, care genereaza dreptunghiuri ce au dimensiuni si culori random
   peste tot pe ecran.
+  De asemenea, am contribuit la partea de logistica, idei pentru joc si cautat poze la o rezolutie buna care sa contribuie la un design consistent.
 
  
 		
