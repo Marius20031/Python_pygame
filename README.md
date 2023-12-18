@@ -7,12 +7,12 @@ De precizat faptul ca jocul la inceput se conecteaza la baza de date MongoDB mot
 jocul poate sa fie jucat doar pe calculatoarele conectate la baza de date.
 
 Ca biblioteci am folosit:
--pentru gameplay-ul dezvoltat - pygame
--pentru randomizare - random
--pentru baza de date - pymongo.server_api
--pentru matrice - numpy
--pentru functia de hash - hashlib
--pentru sleep - asyncio
+-pentru gameplay-ul dezvoltat - pygame.
+-pentru randomizare - random.
+-pentru baza de date - pymongo.server_api.
+-pentru matrice - numpy.
+-pentru functia de hash - hashlib.
+-pentru sleep - asyncio.
 
 O dificultate intampinata a fost accea cand jocul incepea chiar daca barcile nu erau puse cum trebuie in matrice, am  rezolvat aceasta problema
 iterand prin toata matricea si daca numarul de 1.uri(numarul de puncte din matrice care formeaza barcile) este egal cu numarul de casute pe care
