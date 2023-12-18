@@ -44,7 +44,8 @@ Importuri bgd:
   de secunde este afisat un mesaj si incepe automat timerul pentru oponent, iar daca lovitura a avut succes atunci timerul va relua de unde a ramas pentru acelasi player, pana cand 
   va rata o lovitura. Pentru a face implementarea completa am avut nevoie de diferite variabile pe care a trebuit sa le integrez astfel incat sa fie modificate si in alte functii
   cum ar fi cele in care sunt verificate loviturile playerilor din runde.py.
-    		Tot aici am facut si functia in care este afisat primul meniu, cel in care apar optiunile de log in, create account, etc., functie ce este apelata in run_game inainte
+  
+Tot aici am facut si functia in care este afisat primul meniu, cel in care apar optiunile de log in, create account, etc., functie ce este apelata in run_game inainte
 sa fie afisat orice altceva. Aici am incercat sa creez un meniu cat mai responsive cu optiunile principale, care apar in aproape orice alt joc. Astfel fiecare buton apasat deschide
 mai departe un alt meniu unde apar diferite optiuni, avand si un buton cu care se poate reveni in meniul prinicpal. De exemplu pentru leaderboard va fi afisat un tabel cu primele 5
 locuri din clasament orodnate dupa nivel. Pentru create account se va deschide un meniu unde trebuie furnizate credentialele pentru crearea unui nou cont, cu acestea apelandu-se mai
