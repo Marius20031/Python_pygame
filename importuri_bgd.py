@@ -92,7 +92,7 @@ explozie=explozie.convert_alpha()
 explozie=pygame.transform.smoothscale(explozie,(70,70))
 
 
-fundal=pygame.image.load("Photos/fundal.jpg")
+fundal=pygame.image.load("Photos/9470396_4161657.jpg")
 fundal=fundal.convert_alpha()
 fundal=pygame.transform.smoothscale(fundal,(1000,1000))
 
@@ -556,7 +556,7 @@ text_rect_54 = text_surface_54.get_rect()
 text_rect_54.center = (675,780)
 
 text_55 = "Game starts in:"
-text_surface_55 = font_urias.render(text_55, True, black)
+text_surface_55 = font_urias.render(text_55, True, white)
 text_rect_55 = text_surface_55.get_rect()
 text_rect_55.center = (500,100)
 def show_text_timer():
@@ -623,25 +623,18 @@ def enter_menu(mai_continua):
                         show_password=1
                     else:
                         show_password=0
-                    print(show_password)
                 if ellipse_rect.collidepoint(event.pos):
-                    print("apas")
                     if show_credentials==1:
-                        x=create_try(username_text,password_text)  #aici am apleat functia, x ar trebui sa aiba valoarea de return buna
+                        x=create_try(username_text,password_text)
                         if x==0:
                             username_conectat[0]=username_text
-                        #x=0 #asta trb sters, e doar pt ca n am baza de date
                     else:
-                        x=login_try(username_text,password_text)   ####trb decomentat
+                        x=login_try(username_text,password_text)
                         if x==0:
                             username_conectat[0]=username_text
-                        #x=0# trb sters,pus ca n am baza de date
-
                 if text_rect_22.collidepoint(event.pos):
                     show_credentials=3
                     get_leaderboard()
-                    ## !!! aici trb apelata functia care modifica matricea de leaderboard sau o returneaza idk, nu conteaza !!!  ##
-                    # cv gen get_leaderboad(date_leaderboard)
                 if text_rect_33.collidepoint(event.pos):
                     x=-1
                     show_credentials=0
@@ -708,9 +701,7 @@ def enter_menu(mai_continua):
             screen.blit(text_surface_54,text_rect_54)
             screen.blit(text_surface_54,(830,750))
             # aici trb sa fie modificata matricea date_leaderboard deja
-            #
             date_leaderboard=matrice_leaderboard
-            #print(date_leaderboard)
             text_56 = date_leaderboard[0][0]
             text_surface_56 = font_meniu.render(text_56, True, gold)
             text_rect_56 = text_surface_56.get_rect()
@@ -895,7 +886,6 @@ def seteaza_level():
 
 def show_level():
     global text_75
-    #if text_75=="":
     seteaza_level()
     #pygame.draw.polygon(screen,gri,romb1)  # romb gri
     #pygame.draw.polygon(screen,gri,romb2)  # romb gri

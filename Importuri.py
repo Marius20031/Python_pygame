@@ -1,11 +1,10 @@
 import pygame
 import numpy as np
-# Inceputul
+
 pygame.init()
 
 
 width, height = 1000, 1000
-#Dimensiunea ^^
 screen = pygame.display.set_mode((width, height))
 
 

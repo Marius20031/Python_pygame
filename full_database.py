@@ -7,8 +7,8 @@ from Functii import *
 
 from runde import *
 
-uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
-#uri = "mongodb+srv://bodo2003:eoXq7eK98PQyfwsm@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
+#uri = "mongodb+srv://zenbot2020:KqVuBbkrJDuU18Ui@cluster5511.xyvvlgm.mongodb.net/?retryWrites=true&w=majority"
+uri = "mongodb+srv://bodo2003:eoXq7eK98PQyfwsm@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
 #uri = "mongodb+srv://robert:LnKSGSt39JNt_@cluster0.facrcqq.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 
@@ -24,8 +24,6 @@ def get_leaderboard():
         level =str(int(int(xp)/10))
 
         matrice_leaderboard.append([username, level, xp])
-    print(matrice_leaderboard)
-
 
 # astea le vreau mereu ^
 def calculate_sha256(input_string):
@@ -45,7 +43,6 @@ def verificare_exisa(username,parola):
     }
 
     var=collection.find_one(query)
-    print(var)
     if var:
         return 1
     else:
@@ -57,7 +54,6 @@ def verificare_exista_username(username):
     }
 
     var=collection.find_one(query)
-    print(var)
     if var:
         return 1
     else:
@@ -67,16 +63,13 @@ def login_try(username,password):
     hashed_password = calculate_sha256(password)
     if verificare_exisa(username,hashed_password)==1:
         get_leaderboard()
-        print("Login corect, datele sunt corecte")
         return 0
     else: # creeaza
-        print("Datele introduse sunt gresite")
         return 1
 
 def create_try(username,password):
     #verific daca exista prima data, si daca nu exista inserez
     if verificare_exista_username(username)==1:
-        print("Username deja folosit")
         return 1
     else: # creeaza
         hashed_password = calculate_sha256(password)
@@ -89,7 +82,6 @@ def create_try(username,password):
             'xp': xp
         }
         collection.insert_one(data_to_insert)
-        print("Utilizator creeat cu succes")
         return 0
 def get_lvl():
     query = {
@@ -101,16 +93,11 @@ def adauga_xp_lovire_buna():
     query = {
         'username': username_conectat[0],
     }
-    query = {
-        'username': username_conectat[0],
-    }
     var = collection.find_one(query)
     # filter_criteria = {'_id': 'document_id_to_update'}  # Replace 'document_id_to_update' with the actual document ID
     xp = var.get('xp')
-    print(xp)
     xp += 15
     collection.update_one(query, {'$set': {'xp': xp}})
-    print("ai nimerit")
 def adauga_xp_ratare():
     query = {
         'username': username_conectat[0],
@@ -118,9 +105,7 @@ def adauga_xp_ratare():
     var = collection.find_one(query)
     #filter_criteria = {'_id': 'document_id_to_update'}  # Replace 'document_id_to_update' with the actual document ID
     xp=var.get('xp')
-    print(xp)
     xp+=5
     collection.update_one(query, {'$set': {'xp': xp}})
-    print("ai ratat")
 
 #def level:
