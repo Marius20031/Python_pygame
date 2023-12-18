@@ -53,6 +53,8 @@ departe functiile din fisierul "full_database", iar in functie de ce intorc aces
 in urma unei operatii reusite de create account respectiv log in vor aparea direct butoane in aceste meniuri pentru a avansa mai departe catre log in/ inceperea jocului, fara a mai fi
 nevoie sa te intorci in meniul principal. Exista si optiunea "play as guest" ce va duce direct la inceperea jocului fara a mai fi nevoie sa te autentifici inainte, insa astfel
 nu iti va fi salvat progresul.
+
+In plus am contribuit prin munca de echipa si la diferite alte aspecte cum ar fi idei pt joc, gasit poze, si alte aspecte ce tin de design.
 		
  
 		
