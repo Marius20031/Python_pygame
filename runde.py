@@ -59,7 +59,18 @@ def runda_adversar(mouse_x,mouse_y):
             q = q * 10
 
 def runda_bot(mouse_x,mouse_y,trebuie_timer):
+    print(mouse_x / cell_size)
+    print(mouse_y / cell_size)
+    #if(mouse_x / cell_size>17.5):
+     #   return
+    if(mouse_y/cell_size>17.5):
+        trebuie_timer[0] = 1
+        return
+    if (mouse_x / cell_size > 23.5):
+        trebuie_timer[0] = 1
+        return
     global nr_sec
+    #var=0
     for x in range(130, 230, 10):
         for q in range(75, 180, 10):
             x = float(x / 10)
@@ -88,6 +99,7 @@ def runda_bot(mouse_x,mouse_y,trebuie_timer):
                     tupla_cu_cercuri[nr_total_cercuri[0]][1]=(2 * q + 1) / 2 * cell_size
                     nr_total_cercuri[0] += 1 # ca sa iau range
                     al_cui_e_randul[0]= nu
+                return
             x = x * 10
             q = q * 10
     if al_cui_e_randul[0]==0:
