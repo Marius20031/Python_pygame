@@ -54,8 +54,8 @@ in urma unei operatii reusite de create account respectiv log in vor aparea dire
 nevoie sa te intorci in meniul principal. Exista si optiunea "play as guest" ce va duce direct la inceperea jocului fara a mai fi nevoie sa te autentifici inainte, insa astfel
 nu iti va fi salvat progresul.
 
-In plus am contribuit prin munca de echipa si la diferite alte aspecte cum ar fi idei pt joc, gasit poze, si alte aspecte ce tin de design.
-
+In plus am contribuit prin munca de echipa si la diferite alte aspecte cum ar fi idei pt joc, gasit poze, si alte aspecte ce tin de design, unul dintre ele fiind afisarea level-ului
+playerului si al botului langa numele lor dupa ce se apasa butonul de start.
 
 Robert:
 
